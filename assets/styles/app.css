@@ -1,3 +1,12 @@
-body {
-    background-color: skyblue;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('../../public/template/fonts/jakarta.ttf') format('opentype'); /* Chemin vers le fichier de police woff */
+    font-weight: 400; /* Poids plus léger pour une police fine */
+    font-style: normal; 
+    
+    
 }
