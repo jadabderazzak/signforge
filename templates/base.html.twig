@@ -1,18 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="author" content="SignForge">
+		<meta name="description" content="SignForge is a powerful digital platform for generating, managing, and signing professional contracts and commercial documents. Boost your business workflow with automation and modern design.">
+		<meta name="keywords" content="digital signature, contract generation, PDF automation, invoice builder, business documents, contract signing, remote signature, document approval, online contracts, electronic signature, business automation, legal tech, signature API, document workflow, startup tools, professional contracts, B2B platform, contract lifecycle, SaaS document tool, secure signature">
+		<meta name="robots" content="index, follow">
+		<meta name="language" content="en">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		<meta property="og:title" content="SignForge - Smart Contract & Document Generator">
+		<meta property="og:description" content="SignForge is a modern platform for creating and signing professional documents online. Trusted by businesses for its efficiency and simplicity.">
+		<meta property="og:image" content="{{ asset('template/logos/logo.png')}}">
+		<meta property="og:url" content="{{ app.request.uri }}">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="SignForge">
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@SignForgeApp">
+		<meta name="twitter:title" content="SignForge - Smart Contract & Document Generator">
+		<meta name="twitter:description" content="Create, manage, and sign business documents online with SignForge. A sleek tool for professionals and startups.">
+		<meta name="twitter:image" content="{{ asset('template/logos/logo.png')}}">
+
+		<title>
+			{% block title %}SignForge — Smart Document Signing
+			{% endblock %}
+		</title>
+		<link rel="icon" href="{{ asset('template/logos/favicon.ico')}}">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="bg-gray-50 sm:mx-0 md:mx-6">
+
+		{% if app.user %}
+			{{ render(controller('App\\Controller\\MenuController::authenticated')) }}
+		{% else %}
+			{{ render(controller('App\\Controller\\MenuController::index')) }}
+		{% endif %}
+
+		<div class="mt-24"> 
+		{% for message in app.flashes('success') %}
+			<div class="mx-auto max-w-lg mt-4 mb-4 bg-green-100 border border-green-300 text-green-800 px-6 py-4 rounded-md shadow-sm flex items-start gap-3">
+				<svg class="w-5 h-5 mt-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						d="M5 13l4 4L19 7"/>
+				</svg>
+				<div class="text-sm font-medium">
+					{{ message }}
+				</div>
+			</div>
+		{% endfor %}
+
+		{% for message in app.flashes('danger') %}
+			<div class="mx-auto max-w-lg mt-4 mb-4 bg-red-100 border border-red-300 text-red-800 px-6 py-4 rounded-md shadow-sm flex items-start gap-3">
+				<svg class="w-5 h-5 mt-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+				<div class="text-sm font-medium">
+					{{ message }}
+				</div>
+			</div>
+		{% endfor %}
+
+		{% for message in app.flashes('warning') %}
+			<div class="mx-auto max-w-lg mt-4 mb-4 bg-yellow-100 border border-yellow-300 text-yellow-800 px-6 py-4 rounded-md shadow-sm flex items-start gap-3">
+				<svg class="w-5 h-5 mt-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+				</svg>
+				<div class="text-sm font-medium">
+					{{ message }}
+				</div>
+			</div>
+		{% endfor %}
+			
+
+		{% block body %}{% endblock %} 
+		</div>
+	</body>
+	</html>
