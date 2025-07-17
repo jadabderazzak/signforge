@@ -20,8 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Assert\NotBlank(message: 'Email cannot be empty.')]
-    #[Assert\Email(message: 'Please enter a valid email address.')]
+    #[Assert\NotBlank(message: 'user.email.not_blank')]
+    #[Assert\Email(message: 'user.email.invalid')]
     private ?string $email = null;
 
     /**
@@ -36,15 +36,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\Length(
         min: 4,
-        minMessage: 'Your password must be at least {{ limit }} characters long.'
+        minMessage: 'user.password.min_length'
     )]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Name cannot be empty.')]
+    #[Assert\NotBlank(message: 'user.name.not_blank')]
     #[Assert\Length(
         min: 2,
-        minMessage: 'Your name must be at least {{ limit }} characters.'
+        minMessage: 'user.name.min_length'
     )]
     private ?string $name = null;
 

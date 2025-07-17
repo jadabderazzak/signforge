@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -21,6 +22,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class SecurityController extends AbstractController
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {}
     #[Route(path: '/login', name: 'app_login')]
     /**
      * Handles the login form display and error handling.
@@ -113,10 +116,10 @@ class SecurityController extends AbstractController
                     $manager->persist($user);
                     $manager->flush();
 
-                    $this->addFlash("success", "Your account has been successfully created. You can now log in.");
+                    $this->addFlash("success", $this->translator->trans("Your account has been successfully created. You can now log in."));
                     return $this->redirectToRoute("app_login");
                 } catch (UniqueConstraintViolationException $e) {
-                    $this->addFlash("danger", "This email address is already in use.");
+                    $this->addFlash("danger", $this->translator->trans("This email address is already in use."));
                 }
 
                 

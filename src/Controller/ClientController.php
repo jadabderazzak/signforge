@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,6 +22,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 final class ClientController extends AbstractController
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {}
+
     #[Route('/client', name: 'app_client')]
     /**
      * Displays the list of all clients.
@@ -76,7 +80,7 @@ final class ClientController extends AbstractController
         $manager->flush();
 
         // ✅ Flash message to confirm success
-        $this->addFlash("success", "✅ New client has been successfully added.");
+        $this->addFlash("success",  $this->translator->trans("New client has been successfully added."));
 
         // ✅ Redirect to client list
         return $this->redirectToRoute("app_client");
@@ -112,7 +116,7 @@ final class ClientController extends AbstractController
         ]);
 
         if(!$client){
-            $this->addFlash("danger", "❌ This client does not exist.");
+            $this->addFlash("danger", $this->translator->trans("This client does not exist."));
             return $this->redirectToRoute("app_client");
         }
        
@@ -135,7 +139,7 @@ final class ClientController extends AbstractController
         $manager->flush();
 
         // ✅ Flash message to confirm success
-        $this->addFlash("success", "✅ New client has been successfully added.");
+        $this->addFlash("success", $this->translator->trans("New client has been successfully added."));
 
         // ✅ Redirect to client list
         return $this->redirectToRoute("app_client");

@@ -16,12 +16,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[IsGranted("ROLE_USER")]
 final class DocumentsController extends AbstractController
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {}
     #[Route('/documents', name: 'app_documents')]
     /**
      * Lists all documents for the currently logged-in user.
@@ -75,7 +78,7 @@ final class DocumentsController extends AbstractController
         ]);
 
         if (!$typeDocument) {
-            $this->addFlash('danger', 'Type Document not found.');
+            $this->addFlash('danger', $this->translator->trans('Type Document not found.'));
             return $this->redirectToRoute('app_documents');
         }
 
@@ -150,7 +153,7 @@ final class DocumentsController extends AbstractController
 
         $document->setStatus(true);
         $manager->flush();
-        $this->addFlash('success', 'The document has been successfully validated.');
+        $this->addFlash('success', $this->translator->trans('The document has been successfully validated.'));
         return $this->redirectToRoute("app_documents");
     }
 
@@ -175,7 +178,7 @@ final class DocumentsController extends AbstractController
         ]);
 
         if (!$document) {
-            $this->addFlash('danger', 'Document not found.');
+            $this->addFlash('danger', $this->translator->trans('Document not found.'));
             return $this->redirectToRoute('app_documents');
         }
 
@@ -184,7 +187,7 @@ final class DocumentsController extends AbstractController
         ]);
 
         if (!$company) {
-            $this->addFlash('danger', 'Company not found.');
+            $this->addFlash('danger', $this->translator->trans('Company not found.'));
             return $this->redirectToRoute('app_documents');
         }
 
@@ -223,7 +226,7 @@ final class DocumentsController extends AbstractController
         ]);
 
         if (!$company) {
-            $this->addFlash('warning', 'Please create your company before adding a document.');
+            $this->addFlash('warning', $this->translator->trans('Please create your company before adding a document.'));
             return $this->redirectToRoute("app_company_add");
         }
 
@@ -279,7 +282,7 @@ final class DocumentsController extends AbstractController
         $documentType = (int)$request->get('document_type');
 
         if (!$clientId || !$documentNumber || !$documentType) {
-            return new JsonResponse(['error' => 'Please fill in all required fields: client, document number and type.'], 400);
+            return new JsonResponse(['error' => $this->translator->trans('Please fill in all required fields: client, document number and type.')], 400);
         }
 
         // Step 2: Cheking if Document number exists in the database
@@ -290,35 +293,35 @@ final class DocumentsController extends AbstractController
         ]);
 
         if ($document) {
-            return new JsonResponse(['error' => 'A document with this number already exists. Please choose a unique document number.'], 400);
+            return new JsonResponse(['error' => $this->translator->trans('A document with this number already exists. Please choose a unique document number.')], 400);
         }
 
         // Step 3: Retrieve and validate item list
         $items = $request->request->all('items');
         if (!$items || !is_array($items)) {
-            return new JsonResponse(['error' => 'At least one item must be provided in the document.'], 400);
+            return new JsonResponse(['error' => $this->translator->trans('At least one item must be provided in the document.')], 400);
         }
 
         foreach ($items as $item) {
             // Validate description and numeric fields
             if (empty($item['description'])) {
-                return new JsonResponse(['error' => 'Each item must include a description.'], 400);
+                return new JsonResponse(['error' => $this->translator->trans('Each item must include a description.')], 400);
             }
             if (!is_numeric($item['qty']) || !is_numeric($item['unit_price'])) {
-                return new JsonResponse(['error' => 'Quantity and unit price must be valid numeric values.'], 400);
+                return new JsonResponse(['error' => $this->translator->trans('Quantity and unit price must be valid numeric values.')], 400);
             }
         }
 
         // Step 4: Fetch client from database
         $client = $repoClient->find($clientId);
         if (!$client) {
-            return new JsonResponse(['error' => 'Selected client was not found. Please refresh the page and try again.'], 400);
+            return new JsonResponse(['error' => $this->translator->trans('Selected client was not found. Please refresh the page and try again.')], 400);
         }
 
         // Step 5: Fetch document type
         $type = $repoType->find($documentType);
         if (!$type) {
-            return new JsonResponse(['error' => 'Selected document type is invalid.'], 400);
+            return new JsonResponse(['error' => $this->translator->trans('Selected document type is invalid.')], 400);
         }
 
         // Step 6: Create and persist the Document entity

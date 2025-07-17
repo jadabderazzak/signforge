@@ -17,61 +17,62 @@ class Company
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'The company name is required.')]
-    #[Assert\Length(
-        max: 255,
-        maxMessage: 'The company name cannot be longer than {{ limit }} characters.'
-    )]
-    private ?string $name = null;
+#[Assert\NotBlank(message: 'company.name.required')]
+#[Assert\Length(
+    max: 255,
+    maxMessage: 'company.name.max_length'
+)]
+private ?string $name = null;
 
-    #[ORM\Column(length: 500, nullable: true)]
-    #[Assert\Length(
-        max: 500,
-        maxMessage: 'The address cannot be longer than {{ limit }} characters.'
-    )]
-    private ?string $adress = null;
+#[ORM\Column(length: 500, nullable: true)]
+#[Assert\Length(
+    max: 500,
+    maxMessage: 'company.address.max_length'
+)]
+private ?string $adress = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(
-        max: 20,
-        maxMessage: 'The phone number cannot be longer than {{ limit }} characters.'
-    )]
-    private ?string $phone = null;
+#[ORM\Column(length: 255, nullable: true)]
+#[Assert\Length(
+    max: 20,
+    maxMessage: 'company.phone.max_length'
+)]
+private ?string $phone = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(
+#[ORM\Column(length: 255, nullable: true)]
+#[Assert\Length(
     max: 50,
-    maxMessage: 'The tax identification number cannot be longer than {{ limit }} characters.'
-    )]
-    private ?string $TaxIdentification = null;
+    maxMessage: 'company.tax_id.max_length'
+)]
+private ?string $TaxIdentification = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(
+#[ORM\Column(length: 255, nullable: true)]
+#[Assert\Length(
     max: 50,
-    maxMessage: 'The registration number cannot be longer than {{ limit }} characters.'
-    )]
-    private ?string $RegistrationNumber = null;
+    maxMessage: 'company.registration_number.max_length'
+)]
+private ?string $RegistrationNumber = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $BankDetails = null;
+#[ORM\Column(type: Types::TEXT, nullable: true)]
+private ?string $BankDetails = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $logo = null;
+#[ORM\Column(length: 255, nullable: true)]
+private ?string $logo = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+#[ORM\ManyToOne]
+#[ORM\JoinColumn(nullable: false)]
+private ?User $user = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $footer = null;
+#[ORM\Column(type: Types::TEXT, nullable: true)]
+private ?string $footer = null;
 
-    #[ORM\Column(length: 255)]
-    #[Gedmo\Slug(fields:["name"])]
-    private ?string $slug = null;
+#[ORM\Column(length: 255)]
+#[Gedmo\Slug(fields:["name"])]
+private ?string $slug = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\NotBlank(message: 'The currency symbol is required.')]
-    private ?string $currency = null;
+#[ORM\Column(length: 10, nullable: true)]
+#[Assert\NotBlank(message: 'company.currency.required')]
+private ?string $currency = null;
+
 
    
 

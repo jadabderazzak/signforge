@@ -16,11 +16,11 @@ class TypeDocument
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Name cannot be empty.')]
+    #[Assert\NotBlank(message: 'documenttype.name.required')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Label cannot be empty.')]
+    #[Assert\NotBlank(message: 'documenttype.label.required')]
     private ?string $label = null;
 
     #[ORM\Column]

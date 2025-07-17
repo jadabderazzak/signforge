@@ -16,42 +16,44 @@ class Client
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Client name is required.")]
+  #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'client.name.required')]
     #[Assert\Length(
         max: 255,
-        maxMessage: "Client name cannot exceed {{ limit }} characters."
+        maxMessage: 'client.name.max_length'
     )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-     #[Assert\NotBlank(message: "Company name name is required.")]
-     #[Assert\Length(
+    #[Assert\NotBlank(message: 'client.company.required')]
+    #[Assert\Length(
         max: 255,
-        maxMessage: "Company name cannot exceed {{ limit }} characters."
+        maxMessage: 'client.company.max_length'
     )]
     private ?string $company = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\Length(
         max: 1000,
-        maxMessage: "Address cannot exceed {{ limit }} characters."
+        maxMessage: 'client.address.max_length'
     )]
     private ?string $adress = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Email(message: "Please enter a valid email address.")]
+    #[Assert\Email(message: 'client.email.invalid')]
     #[Assert\Length(
         max: 255,
-        maxMessage: "Email cannot exceed {{ limit }} characters."
+        maxMessage: 'client.email.max_length'
     )]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: "Tax number cannot exceed {{ limit }} characters."
+        maxMessage: 'client.tax_number.max_length'
     )]
+
+
     private ?string $taxNumber = null;
 
     #[ORM\Column(length: 255)]

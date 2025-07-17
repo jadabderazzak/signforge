@@ -11,12 +11,15 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[IsGranted("ROLE_USER")]
 final class CompanyController extends AbstractController
 {
+     public function __construct(private readonly TranslatorInterface $translator)
+    {}
     #[Route('/company', name: 'app_company')]
     /**
      * Displays the current user's company information.
@@ -114,13 +117,13 @@ final class CompanyController extends AbstractController
                 // Extension verification
                 $extension = $logo->guessExtension();
                 if (!in_array($extension, $extentions)) {
-                    $this->addFlash('danger', '❌ Invalid logo format. Only JPG and PNG files are allowed.');
+                    $this->addFlash('danger', $this->translator->trans('Invalid logo format. Only JPG and PNG files are allowed.'));
                     return $this->redirectToRoute('app_company_add');
                 }
 
                 // Size verification
                 if (filesize($logo) > 5000000) {
-                    $this->addFlash('danger', '❌ Logo is too large. Maximum allowed size is 5MB.');
+                    $this->addFlash('danger', $this->translator->trans('Logo is too large. Maximum allowed size is 5MB.'));
                      return $this->redirectToRoute('app_company_add');
                 }
                     if ($company->getLogo()) {
@@ -150,7 +153,7 @@ final class CompanyController extends AbstractController
             $manager->flush(); // Commit the changes to the database
 
             // ✅ Notify the user that the company has been successfully created
-            $this->addFlash("success", "✅ The company has been successfully registered.");
+            $this->addFlash("success", $this->translator->trans("The company has been successfully registered."));
 
             // ✅ Redirect to the company listing or dashboard route
             return $this->redirectToRoute("app_company");
@@ -187,7 +190,7 @@ final class CompanyController extends AbstractController
        ]);
 
        if(!$company){
-        $this->addFlash("danger", "❌ No company found for your account.");
+        $this->addFlash("danger", $this->translator->trans("No company found for your account."));
         return $this->redirectToRoute("app_board");
        }
        // ✅ Set default text of additional information if empty
@@ -244,7 +247,7 @@ final class CompanyController extends AbstractController
                 // Extension verification
                 $extension = $logo->guessExtension();
                 if (!in_array($extension, $extentions)) {
-                    $this->addFlash('danger', '❌ Invalid logo format. Only JPG and PNG files are allowed.');
+                    $this->addFlash('danger', $this->translator->trans('Invalid logo format. Only JPG and PNG files are allowed.'));
                     return $this->redirectToRoute('app_company_update', [
                         'slug' => $company->getSlug()
                     ]);
@@ -252,7 +255,7 @@ final class CompanyController extends AbstractController
 
                 // Size verification
                 if (filesize($logo) > 5000000) {
-                    $this->addFlash('danger', '❌ Logo is too large. Maximum allowed size is 5MB.');
+                    $this->addFlash('danger', $this->translator->trans('Logo is too large. Maximum allowed size is 5MB.'));
                      return $this->redirectToRoute('app_company_update', [
                         'slug' => $company->getSlug()
                     ]);
@@ -286,7 +289,7 @@ final class CompanyController extends AbstractController
             $manager->flush(); // Commit the changes to the database
 
             // ✅ Notify the user that the company has been successfully created
-            $this->addFlash("success", "✅ The company has been successfully updated.");
+            $this->addFlash("success", $this->translator->trans("The company has been successfully updated."));
 
             // ✅ Redirect to the company listing or dashboard route
             return $this->redirectToRoute("app_company");

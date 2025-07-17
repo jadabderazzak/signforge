@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}SignForge |
-	{{ update ? "Edit Document Type" : "Add Document Type" }}
+	{{ update ? "Edit Document Type" | trans : "Add Document Type" | trans }}
 {% endblock %}
 
 {% block body %}
@@ -17,8 +17,8 @@
 						</svg>
 					</div>
 					<div>
-						<h1 class="text-2xl font-bold text-gray-900">{{ update ? "Edit Document Type" : "Add Document Type" }}</h1>
-						<p class="text-sm text-gray-600 mt-1">Define the technical name and label for this document type.</p>
+						<h1 class="text-2xl font-bold text-gray-900">{{ update ? "Edit Document Type" | trans : "Add Document Type" | trans }}</h1>
+						<p class="text-sm text-gray-600 mt-1">{{ "Define the technical name and label for this document type."|trans }}</p>
 					</div>
 				</div>
 			</div>
@@ -31,11 +31,11 @@
 					class="grid grid-cols-1 md:grid-cols-2 gap-5">
 					<!-- Name -->
 					<div>
-						{{ form_label(form.name, 'Technical Name', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+						{{ form_label(form.name, 'Technical Name' | trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
 						{{ form_widget(form.name, {
                         'attr': {
                             'class': 'w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200',
-                            'placeholder': 'Enter the name of the document type'
+                            'placeholder': 'Enter the name of the document type' | trans
                         }
                     }) }}
 						<span class="text-xs text-red-600 mt-1 block">{{ form_errors(form.name) }}</span>
@@ -43,11 +43,11 @@
 
 					<!-- Label -->
 					<div>
-						{{ form_label(form.label, 'Display Label', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+						{{ form_label(form.label, 'Display Label' | trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
 						{{ form_widget(form.label, {
                         'attr': {
                             'class': 'w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200',
-                            'placeholder': 'Enter the display label for the document type'
+                            'placeholder': 'Enter the display label for the document type' | trans
                         }
                     }) }}
 						<span class="text-xs text-red-600 mt-1 block">{{ form_errors(form.label) }}</span>
@@ -57,7 +57,7 @@
 				<!-- Submit Button -->
 				<div class="pt-4 flex justify-end space-x-3">
 					<a href="{{ path('app_documents_types') }}" class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-						Cancel
+						{{ 'Cancel'|trans }}
 					</a>
 					<button type="submit" class="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
 
@@ -65,7 +65,7 @@
 							<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
 						</svg>
 
-						Save Type
+						{{ 'Save Type'|trans }}
 					</button>
 				</div>
 

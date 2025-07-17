@@ -29,7 +29,7 @@
  *        - svg#spinner → loader spinner (initially hidden)
  */
 document.addEventListener('DOMContentLoaded', function () {
-
+    const trans = window.translations;
     // Shared variables
     const itemsWrapper = document.getElementById('items-wrapper');
     let itemIndex = 1;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         submitBtn.disabled = false;
         spinner.classList.add('hidden');
-        submitLabel.textContent = 'Save Document';
+        submitLabel.textContent = trans.save;
     }
 
     /**
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Loader start
         submitBtn.disabled = true;
         spinner.classList.remove('hidden');
-        submitLabel.textContent = 'Saving...';
+        submitLabel.textContent = trans.saving;
 
         // Validate static fields
         [clientSelect, documentNumber, documentType].forEach(input => {
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!valid) {
             resetSubmitButtonState();
-            toastr.error('Please fill in all required fields correctly.');
+            toastr.error(trans.errorFields);
             return;
         }
 
@@ -207,17 +207,17 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                toastr.success('Document saved successfully!');
+                toastr.success(trans.success);
                 window.location.href = '/documents';
             } else {
                 resetSubmitButtonState();
-                toastr.error(data.error || 'Unexpected server response. Please try again.');
+                toastr.error(data.error || trans.errorServer);
             }
         })
         .catch(error => {
             console.error(error);
             resetSubmitButtonState();
-            toastr.error('Unable to save the document. Please check your connection and try again.');
+            toastr.error( trans.errorNetwork);
         });
     });
 

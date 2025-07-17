@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SignForge | Clients{% endblock %}
+{% block title %}{{ 'SignForge | Clients'|trans }}{% endblock %}
 
 {% block body %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -13,8 +13,8 @@
                 </svg>
             </div>
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Clients</h1>
-                <p class="text-sm text-gray-500 mt-1">Manage all your clients in one place</p>
+                <h1 class="text-2xl font-bold text-gray-900">{{ 'Clients'|trans }}</h1>
+                <p class="text-sm text-gray-500 mt-1">{{ 'Manage all your clients in one place'|trans }}</p>
             </div>
         </div>
         <div class="mt-4 sm:mt-0">
@@ -23,7 +23,7 @@
                 <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
-                Add New Client
+                {{ 'Add New Client'|trans }}
             </a>
         </div>
     </div>
@@ -35,11 +35,11 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax Number</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Name'|trans }}</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Email'|trans }}</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Company'|trans }}</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Tax Number'|trans }} </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Actions'|trans }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -68,8 +68,8 @@
                                     <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
-                                    <p class="mt-2 text-gray-600">No clients found</p>
-                                    <a href="{{ path('app_client_add') }}" class="mt-2 text-sm text-blue-600 hover:text-blue-800">Add your first client</a>
+                                    <p class="mt-2 text-gray-600">{{ 'No clients found'|trans }}</p>
+                                    <a href="{{ path('app_client_add') }}" class="mt-2 text-sm text-blue-600 hover:text-blue-800">{{ 'Add your first client'|trans }}</a>
                                 </div>
                             </td>
                         </tr>

@@ -33,6 +33,21 @@
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			<script>
+				function onChangeLanguage(value)
+				{
+					if (value === "en") {
+							window.location.href = "/change/locales/en";
+							} else if (value === "fr") {
+							window.location.href = "/change/locales/fr";
+							} else if (value === "de") {
+							window.location.href = "/change/locales/de";
+							}else if (value === "es") {
+							window.location.href = "/change/locales/es";
+							}
+
+				}
+			</script>
 		{% endblock %}
 	</head>
 	<body class="bg-gray-50 sm:mx-0 md:mx-6">

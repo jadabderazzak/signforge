@@ -11,6 +11,7 @@ use App\Repository\TypeDocumentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -22,6 +23,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 final class DocumentsTypesController extends AbstractController
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {}
     #[Route('/documents/types', name: 'app_documents_types')]
     /**
      * Displays the list of all document types available in the system.
@@ -74,7 +77,7 @@ final class DocumentsTypesController extends AbstractController
             $manager->flush();
 
             // ✅ Notify the user of success
-            $this->addFlash("success", "Document type added successfully.");
+            $this->addFlash("success", $this->translator->trans("Document type added successfully."));
 
             // 🔁 Redirect back to the document types list
             return $this->redirectToRoute("app_documents_types");

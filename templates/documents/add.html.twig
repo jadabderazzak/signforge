@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SignForge | New Document
+{% block title %}{{ 'SignForge | New Document'|trans }}
 {% endblock %}
 
 {% block body %}
@@ -11,9 +11,9 @@
 					<svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
 					</svg>
-					Create New Document
+					{{ 'Create New Document'|trans }}
 				</h1>
-				<p class="text-sm text-gray-500 mt-1">Fill in the information below to generate your document</p>
+				<p class="text-sm text-gray-500 mt-1">{{ 'Fill in the information below to generate your document'|trans }}</p>
 			</div>
 
 
@@ -30,7 +30,7 @@
 							<svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
 							</svg>
-							Company Profile
+							{{ 'Company Profile'|trans }}
 						</h2>
 					</div>
 
@@ -39,7 +39,7 @@
 						<!-- Logo Section -->
 						<div class="w-full md:w-1/3 mb-6 md:mb-0">
 							<div class="space-y-2">
-								<label class="block text-sm font-medium text-gray-700">Company Logo</label>
+								<label class="block text-sm font-medium text-gray-700">{{ 'Company Logo'|trans }}</label>
 								<div class="flex items-center justify-center w-full h-48 border-2 border-gray-200 border-dashed rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors duration-200 overflow-hidden">
 									{% if company.logo %}
 										<img src="{{ asset('template/logos/' ~ company.logo) }}" alt="Company Logo" class="h-full w-full object-contain p-4">
@@ -48,7 +48,7 @@
 											<svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
 											</svg>
-											<p class="mt-2 text-sm text-gray-500">No logo uploaded</p>
+											<p class="mt-2 text-sm text-gray-500">{{ 'No logo uploaded'|trans }}</p>
 										</div>
 									{% endif %}
 								</div>
@@ -61,37 +61,37 @@
 								class="grid grid-cols-1 md:grid-cols-2 gap-4">
 								<!-- Company Name -->
 								<div class="bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Company Name</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Company Name'|trans }}</p>
 									<p class="mt-1 text-sm font-medium text-gray-900">{{ company.name }}</p>
 								</div>
 
 								<!-- Phone -->
 								<div class="bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Phone'|trans }}</p>
 									<p class="mt-1 text-sm font-medium text-gray-900">{{ company.phone ?: '-' }}</p>
 								</div>
 
 								<!-- Address -->
 								<div class="md:col-span-2 bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Address</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Address'|trans }}</p>
 									<p class="mt-1 text-sm text-gray-700 whitespace-pre-line">{{ company.adress|striptags ?: '-' }}</p>
 								</div>
 
 								<!-- Tax Identification -->
 								<div class="bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Tax ID</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Tax ID'|trans }}</p>
 									<p class="mt-1 text-sm font-medium text-gray-900">{{ company.taxIdentification ?: '-' }}</p>
 								</div>
 
 								<!-- Registration Number -->
 								<div class="bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Registration #</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{ 'Registration #'|trans }}</p>
 									<p class="mt-1 text-sm font-medium text-gray-900">{{ company.registrationNumber ?: '-' }}</p>
 								</div>
 
 								<!-- Bank Details -->
 								<div class="md:col-span-2 bg-gray-50 p-4 rounded-lg">
-									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Bank Details</p>
+									<p class="text-xs font-medium text-gray-500 uppercase tracking-wider">{{"Additional Information" | trans}}</p>
 									<p class="mt-1 text-sm text-gray-700 whitespace-pre-line">{{ company.bankDetails|striptags ?: '-' }}</p>
 								</div>
 							</div>
@@ -101,7 +101,7 @@
 					<!-- Footer -->
 					<div class="px-6 py-3 bg-gray-50 border-t border-gray-200 text-right">
 						<a href="{{ path('app_company_update',{slug : company.slug})}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
-							Edit Company Info
+							{{ 'Edit Company Info'|trans }}
 						</a>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 							<svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
 							</svg>
-							Document Information
+							{{ 'Document Information'|trans }}
 						</h3>
 
 						<!-- Form Row - Responsive -->
@@ -125,12 +125,12 @@
 							class="flex flex-col sm:flex-row gap-4">
 							<!-- Client Select - Left Side -->
 							<div class="flex-1">
-								<label for="client-select" class="block text-sm font-medium text-gray-700 mb-1">Select Client
+								<label for="client-select" class="block text-sm font-medium text-gray-700 mb-1">{{ 'Select Client'|trans }}
 									<span class="text-red-500 ml-1">*</span>
 								</label>
 								<div class="flex items-center gap-2">
 									<select id="client-select" name="client_id" class="flex-1 bg-white border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ">
-										<option value="">-- Choose a client --</option>
+										<option value="">{{ '-- Choose a client --'|trans }}</option>
 										{% for client in clients %}
 											<option value="{{ client.id }}">{{ client.name }}
 												-
@@ -141,14 +141,14 @@
 										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
 										</svg>
-										<span class="sr-only">Add client</span>
+										<span class="sr-only">{{ 'Add client'|trans }}</span>
 									</a>
 								</div>
 							</div>
 
 							<!-- Document Number - Right Side -->
 							<div class="flex-1">
-								<label for="document-number" class="block text-sm font-medium text-gray-700 mb-1">Document Number
+								<label for="document-number" class="block text-sm font-medium text-gray-700 mb-1">{{ 'Document Number'|trans }}
 									<span class="text-red-500 ml-1">*</span>
 								</label>
 								<input type="text" id="document-number" name="document_number" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="e.g. INV-2025-0001">
@@ -156,12 +156,12 @@
 							<div class="flex-1">
 
 
-								<label for="document-type" class="block text-sm font-medium text-gray-700 mb-1">Document Type
+								<label for="document-type" class="block text-sm font-medium text-gray-700 mb-1">{{ 'Document Type'|trans }}
 									<span class="text-red-500 ml-1">*</span>
 								</label>
 								<select id="document-type" name="document_type" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500  bg-white pr-8">
 									{% for type in types %}
-										<option value="{{ type.id }}">{{ type.label }}</option>
+										<option value="{{ type.id }}">{{ type.label | trans }}</option>
 									{% endfor %}
 								</select>
 
@@ -174,9 +174,9 @@
 					<!-- Items -->
 					<div>
 						<div class="flex justify-between items-center mb-4">
-							<h2 class="text-lg font-semibold text-gray-800">Items</h2>
+							<h2 class="text-lg font-semibold text-gray-800">{{ 'Items'|trans }}</h2>
 							<button type="button" class="add-item inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700">
-								+ Add item
+								{{ '+ Add item'|trans }}
 							</button>
 						</div>
 
@@ -186,12 +186,12 @@
 								<!-- Version Desktop (optimisée pour les grands écrans) -->
 								<div class="">
 									<div class="grid grid-cols-12 gap-2 items-center bg-gray-50 px-4 py-3 rounded-t-lg border border-gray-200">
-										<div class="col-span-4 text-sm font-medium text-gray-600">Description</div>
-										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">Qty</div>
-										<div class="col-span-2 text-sm font-medium text-gray-600 text-left">Unit Price</div>
-										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">Discount</div>
-										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">Tax</div>
-										<div class="col-span-2 text-sm font-medium text-gray-600 text-left">Total</div>
+										<div class="col-span-4 text-sm font-medium text-gray-600">{{ 'Description'|trans }}</div>
+										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">{{ 'Qty'|trans }}</div>
+										<div class="col-span-2 text-sm font-medium text-gray-600 text-left">{{ 'Unit Price'|trans }}</div>
+										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">{{ 'Discount'|trans }}</div>
+										<div class="col-span-1 text-sm font-medium text-gray-600 text-left">{{ 'Tax'|trans }}</div>
+										<div class="col-span-2 text-sm font-medium text-gray-600 text-left">{{ 'Total'|trans }}</div>
 										<div class="col-span-1"></div>
 									</div>
 
@@ -201,40 +201,40 @@
 
 											<!-- Description -->
 											<div class="md:col-span-4">
-												<label class="block md:hidden text-xs text-gray-500">Description</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Description'|trans }}</label>
 												<input type="text" name="items[0][description]" class="description w-full border rounded-lg px-3 py-2 text-sm" placeholder="Description">
 											</div>
 
 											<!-- Qty -->
 											<div class="md:col-span-1">
-												<label class="block md:hidden text-xs text-gray-500">Qty</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Qty'|trans }}</label>
 												<input type="text" name="items[0][qty]" class="qty w-full border rounded-lg px-3 py-2 text-sm text-right" value="1" min="1">
 											</div>
 
 											<!-- Unit Price -->
 											<div class="md:col-span-2 relative">
-												<label class="block md:hidden text-xs text-gray-500">Unit Price</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Unit Price'|trans }}</label>
 												<span class="absolute left-3 top-9 md:top-1/2 transform md:-translate-y-1/2 text-gray-400 text-sm">{{ currency }}</span>
 												<input type="text" name="items[0][unit_price]" class="unit w-full border rounded-lg pl-8 pr-3 py-2 text-sm text-right" value="0.00" step="0.01" min="0">
 											</div>
 
 											<!-- Discount -->
 											<div class="md:col-span-1 relative">
-												<label class="block md:hidden text-xs text-gray-500">Discount</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Discount'|trans }}</label>
 												<input type="text" name="items[0][discount]" class="discount w-full border rounded-lg px-3 py-2 text-sm text-left" value="0" min="0" max="100">
 												<span class="absolute right-3 top-9 md:top-1/2 transform md:-translate-y-1/2 text-gray-400 text-sm">%</span>
 											</div>
 
 											<!-- Tax -->
 											<div class="md:col-span-1 relative">
-												<label class="block md:hidden text-xs text-gray-500">Tax</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Tax'|trans }}</label>
 												<input type="text" name="items[0][tax]" class="tax w-full border rounded-lg px-3 py-2 text-sm text-left" value="0" min="0" max="100">
 												<span class="absolute right-3 top-9 md:top-1/2 transform md:-translate-y-1/2 text-gray-400 text-sm">%</span>
 											</div>
 
 											<!-- Total -->
 											<div class="md:col-span-2 relative">
-												<label class="block md:hidden text-xs text-gray-500">Total</label>
+												<label class="block md:hidden text-xs text-gray-500">{{ 'Total'|trans }}</label>
 												<span class="absolute left-3 top-9 md:top-1/2 transform md:-translate-y-1/2 text-gray-400 text-sm">{{ currency }}</span>
 												<input type="text" class="total w-full border-none bg-gray-50 rounded-lg pl-8 pr-3 py-2 text-sm font-medium text-right" value="0.00" readonly>
 											</div>
@@ -259,7 +259,7 @@
 										<svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
 										</svg>
-										Add item
+										{{"Add item" | trans}}
 									</button>
 								</div>
 							</div>
@@ -271,23 +271,23 @@
 						<div class="w-full md:w-1/2 lg:w-1/3 space-y-3">
 
 							<div class="flex justify-between">
-								<span class="text-sm text-gray-600">Subtotal</span>
+								<span class="text-sm text-gray-600">{{ 'Subtotal'|trans }}</span>
 								<span id="subtotal" class="text-sm font-medium">{{ currency }}0.00</span>
 							</div>
 
 							<div class="flex justify-between">
-								<span class="text-sm text-gray-600">Total Discount</span>
+								<span class="text-sm text-gray-600">{{ 'Total Discount'|trans }}</span>
 								<span id="discount-total" class="text-sm font-medium text-red-600">-{{ currency }}0.00</span>
 							</div>
 
 							<div class="flex justify-between">
-								<span class="text-sm text-gray-600">Total Tax</span>
+								<span class="text-sm text-gray-600">{{ 'Total Tax'|trans }}</span>
 								<span id="tax-total" class="text-sm font-medium">{{ currency }}0.00</span>
 							</div>
 
 							<div class="pt-2 border-t border-gray-200">
 								<div class="flex justify-between">
-									<span class="text-base font-semibold">Total</span>
+									<span class="text-base font-semibold">{{ 'Total'|trans }}</span>
 									<span id="grand-total" class="text-lg font-bold text-blue-600">{{ currency }}0.00</span>
 								</div>
 							</div>
@@ -304,7 +304,7 @@
 								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
 							</svg>
-							<span id="submit-label">Save Document</span>
+							<span id="submit-label">{{ 'Save Document'|trans }}</span>
 						</button>
 
 					</div>
@@ -316,4 +316,14 @@
 {% block javascripts %}
 	{{ parent()}}
 	{{ encore_entry_script_tags('addDocument') }}
+	<script>
+		window.translations = {
+			save: "{{ 'Save Document.'|trans|e('js') }}",
+			saving: "{{ 'Saving...'|trans|e('js') }}",
+			errorFields: "{{ 'Please fill in all required fields correctly.'|trans|e('js') }}",
+			success: "{{ 'Document saved successfully!'|trans|e('js') }}",
+			errorServer: "{{ 'Unexpected server response. Please try again.'|trans|e('js') }}",
+			errorNetwork: "{{ 'Unable to save the document. Please check your connection and try again.'|trans|e('js') }}"
+		};
+	</script>
 {% endblock %}

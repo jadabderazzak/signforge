@@ -19,7 +19,7 @@ class Document
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: 'Type document cannot be empty.')]
+   #[Assert\NotBlank(message: 'document.type.required')]
     private ?TypeDocument $type = null;
 
   

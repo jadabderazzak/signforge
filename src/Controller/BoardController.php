@@ -74,7 +74,7 @@ final class BoardController extends AbstractController
 
         // Data for document type distribution (e.g. invoice, quote)
         $documentTypes = $documentRepository->getCountByType($this->getUser());
-
+  
         // Data for revenue over the past 12 months
         $monthlyRevenue = $documentRepository->getMonthlyRevenue($this->getUser());
 

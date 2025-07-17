@@ -1,0 +1,28 @@
+user.email.not_blank: "Email cannot be empty."
+user.email.invalid: "Please enter a valid email address."
+user.password.min_length: "Your password must be at least {{ limit }} characters long."
+user.name.not_blank: "Name cannot be empty."
+user.name.min_length: "Your name must be at least {{ limit }} characters."
+client.name.required: "Client name is required."
+client.name.max_length: "Client name cannot exceed {{ limit }} characters."
+
+client.company.required: "Company name is required."
+client.company.max_length: "Company name cannot exceed {{ limit }} characters."
+
+client.address.max_length: "Address cannot exceed {{ limit }} characters."
+
+client.email.invalid: "Please enter a valid email address."
+client.email.max_length: "Email cannot exceed {{ limit }} characters."
+
+client.tax_number.max_length: "Tax number cannot exceed {{ limit }} characters."
+company.name.required: "The company name is required."
+company.name.max_length: "The company name cannot be longer than {{ limit }} characters."
+
+company.address.max_length: "The address cannot be longer than {{ limit }} characters."
+company.phone.max_length: "The phone number cannot be longer than {{ limit }} characters."
+company.tax_id.max_length: "The tax identification number cannot be longer than {{ limit }} characters."
+company.registration_number.max_length: "The registration number cannot be longer than {{ limit }} characters."
+company.currency.required: "The currency symbol is required."
+document.type.required: "Type document cannot be empty."
+documenttype.name.required: "Name cannot be empty."
+documenttype.label.required: "Label cannot be empty."

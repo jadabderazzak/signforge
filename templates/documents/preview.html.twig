@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SignForge | Document {{ document.documentNumber }}{% endblock %}
+{% block title %}SignForge | {{ 'Document'|trans }} {{ document.documentNumber }}{% endblock %}
 
 {% block body %}
 <style>
@@ -219,34 +219,34 @@
         </div>
 
         <div class="document-title">
-            <h1>{{ document.type.label }}</h1>
-            <p class="document-meta">REF #: {{ document.documentNumber }}</p>
-            <p class="document-meta">Date: {{ document.createdAt|date('Y-m-d') }}</p>
+            <h1>{{ document.type.label | capitalize | trans }}</h1>
+            <p class="document-meta">{{ 'REF #'|trans }}: {{ document.documentNumber }}</p>
+            <p class="document-meta">{{ 'Date'|trans }}: {{ document.createdAt|date('Y-m-d') }}</p>
         </div>
     </div>
 
     <!-- Information Sections -->
     <div class="info-sections">
         <div class="info-section">
-            <h2>Emitter Information</h2>
+            <h2>{{ 'Emitter Information'|trans }}</h2>
             <table class="info-table">
-                <tr><td>Name:</td><td>{{ company.name }}</td></tr>
-                <tr><td>Address:</td><td>{{ company.adress ?: '-' }}</td></tr>
-                <tr><td>Phone:</td><td>{{ company.phone ?: '-' }}</td></tr>
-                <tr><td>Tax ID:</td><td>{{ company.taxIdentification ?: '-' }}</td></tr>
-                <tr><td>Registration #:</td><td>{{ company.registrationNumber ?: '-' }}</td></tr>
+                <tr><td>{{ 'Name'|trans }}:</td><td>{{ company.name }}</td></tr>
+                <tr><td>{{ 'Address'|trans }}:</td><td>{{ company.adress ?: '-' }}</td></tr>
+                <tr><td>{{ 'Phone'|trans }}:</td><td>{{ company.phone ?: '-' }}</td></tr>
+                <tr><td>{{ 'Tax ID'|trans }}:</td><td>{{ company.taxIdentification ?: '-' }}</td></tr>
+                <tr><td>{{ 'Registration #'|trans }}:</td><td>{{ company.registrationNumber ?: '-' }}</td></tr>
             </table>
         </div>
 
         <div class="info-section">
-            <h2>Client Information</h2>
+            <h2>{{ 'Client Information'|trans }}</h2>
             <table class="info-table">
                
-                <tr><td>Company:</td><td>{{ document.client.company }}</td></tr>
-                <tr><td>Contact name:</td><td>{{ document.client.name }}</td></tr>
-                <tr><td>Address:</td><td>{{ document.client.adress ?: '-' }}</td></tr>
-                <tr><td>Email:</td><td>{{ document.client.email }}</td></tr>
-                <tr><td>Tax Number #:</td><td>{{ document.client.taxNumber }}</td></tr>
+                <tr><td>{{ 'Company'|trans }}:</td><td>{{ document.client.company }}</td></tr>
+                <tr><td>{{ 'Contact name'|trans }}:</td><td>{{ document.client.name }}</td></tr>
+                <tr><td>{{ 'Address'|trans }}:</td><td>{{ document.client.adress ?: '-' }}</td></tr>
+                <tr><td>{{ 'Email'|trans }}:</td><td>{{ document.client.email }}</td></tr>
+                <tr><td>{{ 'Tax Number #'|trans }}:</td><td>{{ document.client.taxNumber }}</td></tr>
             </table>
         </div>
     </div>
@@ -257,12 +257,12 @@
     <table class="items-table">
         <thead>
             <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Unit Price</th>
-                <th>Discount (%)</th>
-                <th>Tax (%)</th>
-                <th class="text-right">Total</th>
+                <th>{{ 'Description'|trans }}</th>
+                <th>{{ 'Qty'|trans }}</th>
+                <th>{{ 'Unit Price'|trans }}</th>
+                <th>{{ 'Discount (%)'|trans }}</th>
+                <th>{{ 'Tax (%)'|trans }}</th>
+                <th class="text-right">{{ 'Total'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -292,19 +292,19 @@
     <!-- Totals Section -->
     <table class="totals-table">
         <tr>
-            <td>Subtotal:</td>
+            <td>{{ 'Subtotal'|trans }}:</td>
             <td>{{ currency ~ subtotal|number_format(2, '.', ',') }}</td>
         </tr>
         <tr>
-            <td>Total Discount:</td>
+            <td>{{ 'Total Discount'|trans }}:</td>
             <td>-{{ currency ~ totalDiscount|number_format(2, '.', ',') }}</td>
         </tr>
         <tr>
-            <td>Total Tax:</td>
+            <td>{{ 'Total Tax'|trans }}:</td>
             <td>{{ currency ~ totalTax|number_format(2, '.', ',') }}</td>
         </tr>
         <tr class="grand-total">
-            <td>Grand Total:</td>
+            <td>{{ 'Grand Total'|trans }}:</td>
             <td>{{ currency ~ grandTotal|number_format(2, '.', ',') }}</td>
         </tr>
     </table>
@@ -312,22 +312,22 @@
     <!-- Additional Information -->
     {% if document.type.name in ['Invoice', 'Purchase Order', 'Quote', 'Credit Note', 'Proforma Invoice'] %}
       <div style="margin-top: 30px; padding: 10px; font-size: 12px; line-height: 1.4; background-color: #f4f4f4; border-left: 3px solid #3498db;">
-    <h2 style="margin: 0 0 8px 0; font-size: 14px; color: #2c3e50;">Additional Information</h2>
+    <h2 style="margin: 0 0 8px 0; font-size: 14px; color: #2c3e50;">{{ 'Additional Information'|trans }}</h2>
     <pre style="margin: 0; white-space: pre-wrap;">{{ company.bankDetails|raw ?: '-' }}</pre>
 </div>
     {% endif %}
 
     <!-- Status Box -->
     <div class="status-box">
-        {{ document.status ? 'This document is confirmed' : 'This document is a draft' }}
+        {{ document.status ? 'This document is confirmed' | trans: 'This document is a draft' | trans }}
     </div>
 </div>
 <a href="{{ path('app_documents_pdf', {slug: document.slug}) }}" target="_blank"
-   class="fixed top-24 right-6 z-50 inline-flex items-center gap-2 px-5 py-3 bg-blue-600 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-blue-700 transition">
+   class="fixed top-24 right-6  inline-flex items-center gap-2 px-5 py-2 bg-blue-600 text-white text-sm font-semibold  shadow-lg hover:bg-blue-700 transition">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round"
               d="M12 11V3m0 0L8 7m4-4l4 4M4 21h16"/>
     </svg>
-    View PDF
+   {{ 'View PDF'|trans }}
 </a>
 {% endblock %}

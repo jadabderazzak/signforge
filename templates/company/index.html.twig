@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SignForge | Company Information{% endblock %}
+{% block title %}{{ 'SignForge | Company Information'|trans }}{% endblock %}
 
 {% block body %}
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -9,13 +9,13 @@
         <div class="px-6 py-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <div class="flex items-center">
                 <h1 class="text-2xl font-bold text-gray-900 leading-6">
-                    🏢 Company Information
+                    🏢 {{ 'Company Information'|trans }}
                 </h1>
             </div>
             <div class="mt-4 sm:mt-0">
                 <a href="{{ path('app_company_update',{slug : company.slug}) }}" 
                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
-                    ✏️ Edit Details
+                    ✏️ {{ 'Edit Details'|trans }}
                 </a>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div>
                     <h3 class="text-lg font-medium text-gray-900">{{ company.name }}</h3>
                     
-                    <p class="text-md text-gray-700">Currency symbol  <span class="font-bold">{{ company.currency }}</span></p>
+                    <p class="text-md text-gray-700">{{ 'Currency symbol'|trans }}  <span class="font-bold">{{ company.currency }}</span></p>
                 </div>
             </div>
             {% endif %}
@@ -41,26 +41,26 @@
             <!-- Basic Info -->
             <div class="py-5 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
-                    <h3 class="text-sm font-medium text-gray-500">Company Name</h3>
+                    <h3 class="text-sm font-medium text-gray-500">{{ 'Company Name'|trans }}</h3>
                     <p class="mt-1 text-sm text-gray-900">{{ company.name }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-500">Phone Number</h3>
+                    <h3 class="text-sm font-medium text-gray-500">{{ 'Phone Number'|trans }}</h3>
                     <p class="mt-1 text-sm text-gray-900">{{ company.phone ?: 'Not provided' }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-500">Tax Identification</h3>
+                    <h3 class="text-sm font-medium text-gray-500">{{ 'Tax Identification'|trans }}</h3>
                     <p class="mt-1 text-sm text-gray-900">{{ company.taxIdentification ?: 'Not provided' }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-medium text-gray-500">Registration Number</h3>
-                    <p class="mt-1 text-sm text-gray-900">{{ company.registrationNumber ?: 'Not provided' }}</p>
+                    <h3 class="text-sm font-medium text-gray-500">{{ 'Registration Number'|trans }}</h3>
+                    <p class="mt-1 text-sm text-gray-900">{{ company.registrationNumber ?: 'Not provided' | trans }}</p>
                 </div>
             </div>
 
             <!-- Address -->
             <div class="py-5">
-                <h3 class="text-sm font-medium text-gray-500">Address</h3>
+                <h3 class="text-sm font-medium text-gray-500">{{ 'Address'|trans }}</h3>
                 <div class="mt-1 text-sm text-gray-900 prose max-w-none">
                     {{ company.adress ? company.adress|raw : '<p class="text-gray-400">Not provided</p>' }}
                 </div>
@@ -68,7 +68,7 @@
 
             <!-- Footer Details -->
             <div class="pt-5">
-                <h3 class="text-sm font-medium text-gray-500">Footer Details</h3>
+                <h3 class="text-sm font-medium text-gray-500">{{ 'Footer Details'|trans }}</h3>
                 <div class="mt-1 text-sm text-gray-900 prose max-w-none">
                     {{ company.footer ? company.footer|raw : '<p class="text-gray-400">Not provided</p>' }}
                 </div>
@@ -76,7 +76,7 @@
 
             <!-- Bank Details -->
             <div class="pt-5">
-                <h3 class="text-sm font-medium text-gray-500">Additional Information</h3>
+                <h3 class="text-sm font-medium text-gray-500">{{ 'Additional Information'|trans }}</h3>
                 <div class="mt-1 text-sm text-gray-900 prose max-w-none">
                     {{ company.bankDetails ? company.bankDetails|raw : '<p class="text-gray-400">Not provided</p>' }}
                 </div>
