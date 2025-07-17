@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+    <h1 class="text-7xl font-bold text-red-500">{{ status_code }}</h1>
+    <h2 class="text-2xl font-semibold text-gray-800 mt-4">Oups! Un problème est survenu.</h2>
+    <p class="text-gray-600 mt-2">
+        {% if status_code == 404 %}
+            La page que vous cherchez n'existe pas ou a été déplacée.
+        {% elseif status_code == 500 %}
+            Il semble qu'il y ait un problème sur le serveur. Veuillez réessayer plus tard.
+        {% else %}
+            Une erreur inattendue s'est produite. Nous travaillons à sa résolution.
+        {% endif %}
+    </p>
+    
+    <a href="{{ path('app_home') }}" class="mt-6 px-6 py-3 text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md transition">
+        Retour à l'accueil
+    </a>
+</div>
+{% endblock %}

@@ -1,3 +1,5 @@
 twig:
+    globals:
+        locales: '%app.locales%'
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'

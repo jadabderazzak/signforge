@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur Serveur{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col items-center justify-center">
+    <h1 class="text-7xl font-bold text-red-500">404</h1>
+    <h2 class="text-2xl font-semibold text-gray-800 mt-4">Oups! Une erreur serveur est survenue.</h2>
+    <p class="text-gray-600 mt-2">Il semble qu'il y ait un problème sur le serveur. Veuillez réessayer plus tard.</p>
+    
+    <a href="{{ path('app_home') }}" class="mt-6 px-6 py-3 text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md transition">
+        Retour à l'accueil
+    </a>
+</div>
+{% endblock %}
