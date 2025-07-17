@@ -1,13 +1,204 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SignForge — Smart Document Signing{% endblock %}
+{% block title %}{{ 'SignForge — Smart Document Signing'|trans }}{% endblock %}
 
 {% block body %}
-
 <div class="w-full">
+<section class="pt-20 pb-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+            <div class="flex-1 text-center lg:text-left">
+                <h1 class="text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+                    {{ 'Generate Professional Business Documents in Minutes'|trans }}
+                </h1>
+                <p class="text-lg text-gray-500 mb-8 max-w-lg mx-auto lg:mx-0">
+                    {{ 'SignForge automates your document workflow with beautiful templates, client management, and secure digital signatures.'|trans }}
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="{{ path('app_login')}}" class="inline-flex items-center justify-center px-6 py-3 text-white font-semibold bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700 transition text-base">
+                        {{ 'Try it now'|trans }}
+                    </a>
+                    <a href="#how-it-works" class="inline-flex items-center justify-center px-6 py-3 text-blue-600 font-semibold border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition text-base">
+                        {{ 'See how it works'|trans }}
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1">
+                <img src="{{ asset('template/images/home.png')}}" alt="{{ 'SignForge Dashboard'|trans }}"
+                     class="rounded-xl shadow-xl border transform hover:scale-105 transition duration-500 hover:rotate-0 rotate-y-[-5deg] scale-[0.98] perspective-[1000px]" />
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="py-20 bg-white" id="features">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ 'Powerful Features for Your Business'|trans }}</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">
+                {{ 'Everything you need to create, manage, and send professional business documents efficiently.'|trans }}
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl p-8 border border-gray-100 shadow hover:-translate-y-2 hover:shadow-lg transition">
+                <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full mb-5 text-2xl">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'PDF Generation'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Generate high-quality PDF documents with your branding, ready for printing or digital delivery.'|trans }}</p>
+            </div>
+            <div class="bg-white rounded-xl p-8 border border-gray-100 shadow hover:-translate-y-2 hover:shadow-lg transition">
+                <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full mb-5 text-2xl">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Client Management'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Store client details, payment terms, and document history all in one organized system.'|trans }}</p>
+            </div>
+            <div class="bg-white rounded-xl p-8 border border-gray-100 shadow hover:-translate-y-2 hover:shadow-lg transition">
+                <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full mb-5 text-2xl">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'All Document Types'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Easily create any type of business document — quotes, invoices, contracts, delivery notes, and more — from one single platform.'|trans }}</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="py-10 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ 'Perfect For'|trans }}</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">{{ 'SignForge adapts to businesses of all sizes across industries.'|trans }}</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-xl p-8 text-center shadow hover:-translate-y-2 transition">
+                <div class="text-4xl text-blue-600 mb-4">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Freelancers'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Professional invoices and contracts that impress clients and get you paid faster.'|trans }}</p>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow hover:-translate-y-2 transition">
+                <div class="text-4xl text-blue-600 mb-4">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Creative Agencies'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Streamline client documentation with branded templates and team collaboration.'|trans }}</p>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow hover:-translate-y-2 transition">
+                <div class="text-4xl text-blue-600 mb-4">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Small Businesses'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Automate your document workflow to save time and maintain consistency.'|trans }}</p>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center shadow hover:-translate-y-2 transition">
+                <div class="text-4xl text-blue-600 mb-4">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Enterprises'|trans }}</h3>
+                <p class="text-gray-500">{{ 'Centralized document generation with approval workflows and audit trails.'|trans }}</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="py-20 bg-white" id="testimonials">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ 'What Our Customers Say'|trans }}</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">{{ 'Trusted by thousands of businesses worldwide.'|trans }}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl p-8 shadow-md relative">
+                <span class="absolute top-4 left-4 text-6xl text-blue-100 font-serif leading-none">“</span>
+                <p class="italic text-gray-600 mb-6 relative z-10">
+                    {{ "SignForge has cut our document creation time by 70%. The templates are beautiful and our clients consistently compliment our professional invoices."|trans }}
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900">{{ 'Sarah Johnson'|trans }}</h4>
+                        <p class="text-sm text-gray-500">{{ 'CEO, Design Studio'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-8 shadow-md relative">
+                <span class="absolute top-4 left-4 text-6xl text-blue-100 font-serif leading-none">“</span>
+                <p class="italic text-gray-600 mb-6 relative z-10">
+                    {{ "SignForge has cut our document creation time by 70%. The templates are beautiful and our clients consistently compliment our professional invoices."|trans }}
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Olivia Martin" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900">{{ 'Olivia Martin'|trans }}</h4>
+                        <p class="text-sm text-gray-500">{{ 'Marketing Director, BrightEdge Media'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-8 shadow-md relative">
+                <span class="absolute top-4 left-4 text-6xl text-blue-100 font-serif leading-none">“</span>
+                <p class="italic text-gray-600 mb-6 relative z-10">
+                    {{ "SignForge has cut our document creation time by 70%. The templates are beautiful and our clients consistently compliment our professional invoices."|trans }}
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Chloe Dubois" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900">{{ 'Chloe Dubois'|trans }}</h4>
+                        <p class="text-sm text-gray-500">{{ 'Founder, Paper & Pixel Studio'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other testimonials... (similarly translated) -->
+
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-gray-50" id="how-it-works">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">{{ 'How SignForge Works'|trans }}</h2>
+    <p class="text-gray-500 text-lg mb-16 max-w-2xl mx-auto">
+      {{ 'A simple, structured process to help you generate business documents effortlessly.'|trans }}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+      <div class="bg-white border border-gray-100 shadow-md rounded-xl p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full text-xl font-bold mb-6">1</div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Set Up Your Company'|trans }}</h3>
+        <p class="text-gray-500">{{ "Once you're logged in, start by creating your company profile. Upload your logo and business information — it will be used automatically in all documents."|trans }}</p>
+      </div>
+      <div class="bg-white border border-gray-100 shadow-md rounded-xl p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full text-xl font-bold mb-6">2</div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Add Your First Client'|trans }}</h3>
+        <p class="text-gray-500">{{ 'Create at least one client profile. Add their company name, contact details, and billing information. You can reuse them for all future documents.'|trans }}</p>
+      </div>
+      <div class="bg-white border border-gray-100 shadow-md rounded-xl p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full text-xl font-bold mb-6">3</div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'Generate & Download'|trans }}</h3>
+        <p class="text-gray-500">{{ 'Select the document type (invoice, quote, contract…), fill in the dynamic form, and download your PDF instantly — ready to send or archive.'|trans }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-50 text-gray-500 py-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-sm text-gray-400">&copy; {{ "now"|date("Y") }} {{ 'SignForge. All rights reserved.'|trans }}</p>
+        <ul class="flex gap-6 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">{{ 'Privacy Policy'|trans }}</a></li>
+            <li><a href="#" class="hover:text-white transition">{{ 'Terms of Service'|trans }}</a></li>
+            <li><a href="#" class="hover:text-white transition">{{ 'Contact'|trans }}</a></li>
+        </ul>
+    </div>
+</footer>
 </div>
-
 {% endblock %}

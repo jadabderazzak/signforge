@@ -14,9 +14,23 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Controller managing user authentication and registration.
+ *
+ * Contains routes for login, logout, and account creation.
+ */
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
+    /**
+     * Handles the login form display and error handling.
+     *
+     * - Redirects already authenticated users to the dashboard.
+     * - Displays the login form with last entered username and error messages if any.
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -32,12 +46,34 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
+    /**
+     * Handles user logout.
+     *
+     * This method is never executed directly. Symfony intercepts the request
+     * and logs the user out via the security firewall configuration.
+     *
+     * @throws \LogicException
+     */
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     #[Route(path: '/register', name: 'app_register')]
+    /**
+     * Handles new user registration.
+     *
+     * - Displays the registration form.
+     * - Validates password confirmation.
+     * - Sanitizes user input to prevent XSS.
+     * - Persists the new user if valid and unique.
+     * - Adds success or error flash messages.
+     *
+     * @param HtmlSanitizer $sanitizer
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     public function register(HtmlSanitizer $sanitizer,Request $request, EntityManagerInterface $manager): Response
     {
         $user = new User();

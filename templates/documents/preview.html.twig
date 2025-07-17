@@ -1,0 +1,333 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SignForge | Document {{ document.documentNumber }}{% endblock %}
+
+{% block body %}
+<style>
+    /* Main Container */
+    .document-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #333;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    /* Header Section */
+    .document-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+       
+    }
+
+    .logo-container {
+        flex: 1;
+    }
+
+    .logo-container img {
+        max-width: 300px;
+    }
+
+    .document-title {
+        text-align: right;
+        flex: 1;
+    }
+
+    .document-title h1 {
+        font-size: 24px;
+        color: #2c3e50;
+        margin: 0 0 5px 0;
+        font-weight: 600;
+    }
+
+    .document-meta {
+        color: #7f8c8d;
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    /* Information Sections */
+    .info-sections {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .info-section {
+        flex: 1;
+    }
+
+    .info-section h2 {
+        font-size: 16px;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #3498db;
+    }
+
+    .info-table {
+        width: 100%;
+    }
+
+    .info-table tr td {
+        padding: 6px 0;
+        vertical-align: top;
+    }
+
+    .info-table tr td:first-child {
+        font-weight: 600;
+        color: #34495e;
+        width: 120px;
+    }
+
+    /* Document Details */
+    .document-details {
+        margin-bottom: 25px;
+    }
+
+    .document-details h2 {
+        font-size: 16px;
+        color: #2c3e50;
+        margin-bottom: 15px;
+    }
+
+    /* Items Table */
+    .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+    }
+
+    .items-table th {
+        background-color: #3498db;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        font-weight: 500;
+    }
+
+    .items-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .items-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Totals Section */
+    .totals-table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .totals-table td {
+        padding: 8px 0;
+    }
+
+    .totals-table td:first-child {
+        text-align: left;
+        padding-right: 20px;
+    }
+
+    .totals-table td:last-child {
+        text-align: right;
+        font-weight: 500;
+    }
+
+    .grand-total {
+        font-weight: 600;
+        font-size: 16px;
+        color: #2c3e50;
+        border-top: 2px solid #3498db;
+        padding-top: 10px;
+    }
+
+    /* Bank Details */
+    .bank-details {
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border-left: 4px solid #3498db;
+    }
+
+    .bank-details h2 {
+        font-size: 16px;
+        color: #2c3e50;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .bank-details pre {
+        margin: 0;
+        font-family: inherit;
+        white-space: pre-wrap;
+        line-height: 1.5;
+    }
+
+    /* Status Section */
+    .status-box {
+        margin-top: 30px;
+        padding: 15px;
+        text-align: center;
+        background-color: #e8f4fd;
+        color: #2980b9;
+        border-radius: 5px;
+        font-weight: 500;
+        border: 1px solid #d0e3f7;
+    }
+
+    /* Utility Classes */
+    .text-right {
+        text-align: right;
+    }
+
+    .divider {
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 25px 0;
+    }
+</style>
+
+<div class="document-container">
+    <!-- Header Section -->
+    <div class="document-header">
+        <div class="logo-container">
+            {% if company.logo %}
+                <img src="{{ absolute_url(asset('template/logos/' ~ company.logo)) }}">
+            {% else %}
+                 <h2 style="
+            font-size: 2.5rem; 
+            color: #2c3e50; 
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            width: 100%;
+            height: 5rem; 
+        ">
+            {{ company.name }}
+        </h2>
+            {% endif %}
+        </div>
+
+        <div class="document-title">
+            <h1>{{ document.type.label }}</h1>
+            <p class="document-meta">REF #: {{ document.documentNumber }}</p>
+            <p class="document-meta">Date: {{ document.createdAt|date('Y-m-d') }}</p>
+        </div>
+    </div>
+
+    <!-- Information Sections -->
+    <div class="info-sections">
+        <div class="info-section">
+            <h2>Emitter Information</h2>
+            <table class="info-table">
+                <tr><td>Name:</td><td>{{ company.name }}</td></tr>
+                <tr><td>Address:</td><td>{{ company.adress ?: '-' }}</td></tr>
+                <tr><td>Phone:</td><td>{{ company.phone ?: '-' }}</td></tr>
+                <tr><td>Tax ID:</td><td>{{ company.taxIdentification ?: '-' }}</td></tr>
+                <tr><td>Registration #:</td><td>{{ company.registrationNumber ?: '-' }}</td></tr>
+            </table>
+        </div>
+
+        <div class="info-section">
+            <h2>Client Information</h2>
+            <table class="info-table">
+               
+                <tr><td>Company:</td><td>{{ document.client.company }}</td></tr>
+                <tr><td>Contact name:</td><td>{{ document.client.name }}</td></tr>
+                <tr><td>Address:</td><td>{{ document.client.adress ?: '-' }}</td></tr>
+                <tr><td>Email:</td><td>{{ document.client.email }}</td></tr>
+                <tr><td>Tax Number #:</td><td>{{ document.client.taxNumber }}</td></tr>
+            </table>
+        </div>
+    </div>
+
+   
+
+    <!-- Items Table -->
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Discount (%)</th>
+                <th>Tax (%)</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set subtotal = 0 %}
+            {% set totalDiscount = 0 %}
+            {% set totalTax = 0 %}
+            {% for item in document.documentItems %}
+                {% set itemTotal = item.unitPrice * item.quantity %}
+                {% set discountAmount = itemTotal * (item.discount / 100) %}
+                {% set taxAmount = (itemTotal - discountAmount) * (item.taxe / 100) %}
+                {% set subtotal = subtotal + itemTotal %}
+                {% set totalDiscount = totalDiscount + discountAmount %}
+                {% set totalTax = totalTax + taxAmount %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ currency ~ item.unitPrice|number_format(2, '.', ',') }}</td>
+                    <td>{{ item.discount }}</td>
+                    <td>{{ item.taxe }}</td>
+                    <td class="text-right">{{ currency ~ item.total|number_format(2, '.', ',') }}</td>
+                </tr>
+            {% endfor %}
+            {% set grandTotal = subtotal - totalDiscount + totalTax %}
+        </tbody>
+    </table>
+
+    <!-- Totals Section -->
+    <table class="totals-table">
+        <tr>
+            <td>Subtotal:</td>
+            <td>{{ currency ~ subtotal|number_format(2, '.', ',') }}</td>
+        </tr>
+        <tr>
+            <td>Total Discount:</td>
+            <td>-{{ currency ~ totalDiscount|number_format(2, '.', ',') }}</td>
+        </tr>
+        <tr>
+            <td>Total Tax:</td>
+            <td>{{ currency ~ totalTax|number_format(2, '.', ',') }}</td>
+        </tr>
+        <tr class="grand-total">
+            <td>Grand Total:</td>
+            <td>{{ currency ~ grandTotal|number_format(2, '.', ',') }}</td>
+        </tr>
+    </table>
+
+    <!-- Additional Information -->
+    {% if document.type.name in ['Invoice', 'Purchase Order', 'Quote', 'Credit Note', 'Proforma Invoice'] %}
+      <div style="margin-top: 30px; padding: 10px; font-size: 12px; line-height: 1.4; background-color: #f4f4f4; border-left: 3px solid #3498db;">
+    <h2 style="margin: 0 0 8px 0; font-size: 14px; color: #2c3e50;">Additional Information</h2>
+    <pre style="margin: 0; white-space: pre-wrap;">{{ company.bankDetails|raw ?: '-' }}</pre>
+</div>
+    {% endif %}
+
+    <!-- Status Box -->
+    <div class="status-box">
+        {{ document.status ? 'This document is confirmed' : 'This document is a draft' }}
+    </div>
+</div>
+<a href="{{ path('app_documents_pdf', {slug: document.slug}) }}" target="_blank"
+   class="fixed top-24 right-6 z-50 inline-flex items-center gap-2 px-5 py-3 bg-blue-600 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-blue-700 transition">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 11V3m0 0L8 7m4-4l4 4M4 21h16"/>
+    </svg>
+    View PDF
+</a>
+{% endblock %}

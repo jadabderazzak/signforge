@@ -9,6 +9,7 @@
         "@symfony/webpack-encore": "^5.0.0",
         "autoprefixer": "^10.4.21",
         "core-js": "^3.38.0",
+        "file-loader": "^6.0.0",
         "postcss": "^8.5.6",
         "postcss-loader": "^8.1.1",
         "regenerator-runtime": "^0.13.9",
@@ -25,7 +26,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^44.3.0",
         "@tailwindcss/postcss": "^4.1.11",
-        "flowbite": "^3.1.2"
+        "ckeditor4": "^4.13.0",
+        "flowbite": "^3.1.2",
+        "toastr": "^2.1.4"
     }
 }

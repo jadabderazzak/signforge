@@ -1,6 +1,6 @@
 <nav class="bg-white dark:bg-gray-900 fixed w-full z-40 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
 	<div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
-		<a href="{{ path('app_home')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
+		<a href="{{ path('app_board')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
 			<img src="{{ asset('template/logos/logo.png')}}" class="w-36" alt="signForge"/>
 		</a>
 		<button data-collapse-toggle="mega-menu-full-image" type="button" class="inline-flex items-center p-2  justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none " aria-controls="mega-menu-full-image" aria-expanded="false">
@@ -10,23 +10,73 @@
 		<div id="mega-menu-full-image" class="items-center justify-between hidden  w-full md:flex md:w-auto md:order-1">
 			<ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
 				<li class="py-0 lg:py-2 border-b-2 border-transparent hover:border-blue-400 transition-all duration-700 ">
-					<a href="{{ path('app_home')}}" class="block py-2 px-3 text-gray-900 text-md  md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">
+					<a href="{{ path('app_board')}}" class="block py-2 px-3 text-gray-900 text-md  md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">
 						Dashboard
 					</a>
 
 				</li>
-
 				<li class="py-0 lg:py-2 border-b-2 border-transparent hover:border-blue-400 transition-all duration-700 ">
-					<a href="{{ path('app_home')}}" class="block py-2 px-3 text-gray-900 text-md   md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
-						New Contract
-					</a>
+					<button id="mega-menu-dropdown-button" data-dropdown-toggle="documents" class="flex items-center justify-between w-full py-2 px-3   text-gray-800 rounded bg-transparent md:border-0  md:p-0 md:w-auto ">
+						My Documents
+						<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+						</svg>
+					</button>
+					<div id="documents" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+						<ul class="py-2 text-sm text-gray-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+							<li>
+								<a href="{{ path('app_documents_add')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-800">
+									New Document
+								</a>
+							</li>
+							<li>
+								<a href="{{ path('app_documents')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-800">
+									All Documents
+								</a>
+							</li>
+						
+							<li>
+								<a href="{{ path('app_documents_types')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-800">
+									Document Types
+								</a>
+							</li>
+
+
+						</ul>
+
+					</div>
+				</li>
+				<li class="py-0 lg:py-2 border-b-2 border-transparent hover:border-blue-400 transition-all duration-700 ">
+					<button id="mega-menu-dropdown-button" data-dropdown-toggle="clients" class="flex items-center justify-between w-full py-2 px-3   text-gray-800 rounded bg-transparent md:border-0  md:p-0 md:w-auto ">
+						Clients
+						<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+						</svg>
+					</button>
+					<div id="clients" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+						<ul class="py-2 text-sm text-gray-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+							<li>
+								<a href="{{ path('app_client_add')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-800">
+									Add client
+								</a>
+							</li>
+							<li>
+								<a href="{{ path('app_client')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-800">
+									List of clients
+								</a>
+							</li>
+						</ul>
+
+					</div>
 				</li>
 
+				
 				<li class="py-0 lg:py-2 border-b-2 border-transparent hover:border-blue-400 transition-all duration-700 ">
-					<a href="{{ path('app_home')}}" class="block py-2 px-3 text-gray-900 text-md   md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
-						My Contracts
+					<a href="{{ path('app_company')}}" class="block py-2 px-3 text-gray-900 text-md   md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+						Company
 					</a>
 				</li>
+			
 				<li class="py-0 lg:py-2 border-b-2 border-transparent hover:border-blue-400 transition-all duration-700 ">
 					<a href="{{ path('app_logout')}}" class="block py-2 px-3 text-gray-900 text-md   md:hover:bg-transparent md:border-0  md:p-0 dark:text-gray-900 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
 						Logout

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SignForge |
+	{{ update ? "Edit Document Type" : "Add Document Type" }}
+{% endblock %}
+
+{% block body %}
+	<div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+		<div
+			class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100">
+			<!-- Header -->
+			<div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-5 border-b border-gray-200">
+				<div class="flex items-center">
+					<div class="p-2 rounded-lg bg-blue-100 mr-4">
+						<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h13M5 12H3m6 0H7m0 0v6a2 2 0 002 2h2a2 2 0 002-2v-6"></path>
+						</svg>
+					</div>
+					<div>
+						<h1 class="text-2xl font-bold text-gray-900">{{ update ? "Edit Document Type" : "Add Document Type" }}</h1>
+						<p class="text-sm text-gray-600 mt-1">Define the technical name and label for this document type.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Form -->
+			<div class="px-6 py-5">
+				{{ form_start(form, {'attr': {'class': 'space-y-5'}}) }}
+
+				<div
+					class="grid grid-cols-1 md:grid-cols-2 gap-5">
+					<!-- Name -->
+					<div>
+						{{ form_label(form.name, 'Technical Name', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+						{{ form_widget(form.name, {
+                        'attr': {
+                            'class': 'w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200',
+                            'placeholder': 'Enter the name of the document type'
+                        }
+                    }) }}
+						<span class="text-xs text-red-600 mt-1 block">{{ form_errors(form.name) }}</span>
+					</div>
+
+					<!-- Label -->
+					<div>
+						{{ form_label(form.label, 'Display Label', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-1'}}) }}
+						{{ form_widget(form.label, {
+                        'attr': {
+                            'class': 'w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200',
+                            'placeholder': 'Enter the display label for the document type'
+                        }
+                    }) }}
+						<span class="text-xs text-red-600 mt-1 block">{{ form_errors(form.label) }}</span>
+					</div>
+				</div>
+
+				<!-- Submit Button -->
+				<div class="pt-4 flex justify-end space-x-3">
+					<a href="{{ path('app_documents_types') }}" class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+						Cancel
+					</a>
+					<button type="submit" class="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+
+						<svg class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewbox="0 0 24 24">
+							<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
+						</svg>
+
+						Save Type
+					</button>
+				</div>
+
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
