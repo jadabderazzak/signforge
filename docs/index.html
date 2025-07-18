@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SignForge Documentation</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      margin: 2em;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+      color: #2c3e50;
+    }
+    h1 + p {
+      margin-top: 0;
+      font-style: italic;
+      color: #7f8c8d;
+    }
+    h2 {
+      margin-top: 2em;
+      margin-bottom: 0.5em;
+      padding-bottom: 0.2em;
+      border-bottom: 2px solid #ecf0f1;
+      color: #34495e;
+    }
+    h3 {
+      margin-top: 1.5em;
+      margin-bottom: 0.3em;
+      color: #2c3e50;
+    }
+    ul {
+      margin-left: 1.5em;
+    }
+    ul.toc {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    ul.toc li {
+      margin: 0.5em 0;
+    }
+    ul.toc a {
+      text-decoration: none;
+      color: #2980b9;
+    }
+    ul.toc a:hover {
+      text-decoration: underline;
+    }
+    code, pre {
+      background: #ecf0f1;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      padding: 1em;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with metadata -->
+  <h1>SignForge Documentation v1.0</h1>
+  <p><strong>Created:</strong> 07/2025 &mdash; <strong>By:</strong> Jad abderazzak (<a href="mailto:support@signforge.tech">support@signforge.tech</a>)</p>
+  <p>Thank you for purchasing SignForge! If you have any questions beyond this document, feel free to contact me.</p>
+
+  <!-- Table of Contents -->
+  <h2>Table of Contents</h2>
+  <ul class="toc">
+    <li><a href="#project-overview">1. Project Overview</a></li>
+    <li><a href="#installation-configuration">2. Installation &amp; Configuration</a></li>
+    <li><a href="#html-structure">3. HTML Structure</a></li>
+    <li><a href="#css-structure">4. CSS Files &amp; Structure</a></li>
+    <li><a href="#javascript-functionality">5. JavaScript Functionality</a></li>
+    <li><a href="#psd-assets">6. PSD Assets</a></li>
+    <li><a href="#sources-credits">7. Sources &amp; Credits</a></li>
+    <li><a href="#php-code-explanation">8. PHP Code Explanation</a></li>
+    <li><a href="#api-integration">9. API Integration</a></li>
+    <li><a href="#unique-features">10. Unique Features &amp; Customizations</a></li>
+    <li><a href="#faq-support">11. FAQ &amp; Support</a></li>
+    <li><a href="#unit-testing">12. Unit Testing</a></li>
+    <li><a href="#internationalization">13. Internationalization</a></li>
+  </ul>
+
+  <h2 id="project-overview">1. Project Overview</h2>
+  <p>
+    SignForge is a Symfony‑based platform that streamlines the creation, management and export of business documents by generating professional, branded PDFs in seconds.
+  </p>
+<figure>
+  <img 
+    src="img/home.png" 
+    alt="SignForge Dashboard overview"
+    style="max-width: 800px; width: 100%; height: auto;"
+  >
+  <figcaption>Dashboard overview</figcaption>
+</figure>
+
+ <h3>Key Features</h3>
+  <ul>
+    <li><strong>PDF Generation:</strong> Generate high‑quality PDF documents branded with your logo.</li>
+    <li><strong>Client Management:</strong> Store and reuse client profiles, billing terms, and document history.</li>
+    <li><strong>All Document Types:</strong> Create quotes, invoices, contracts, delivery notes, and more.</li>
+    <li><strong>Global Dashboard:</strong> Get an at‑a‑glance view of document statuses, client activity, and key metrics in real time.</li>
+  </ul>
+
+  <h3>Target Audience</h3>
+  <ul>
+    <li>Freelancers</li>
+    <li>Creative Agencies</li>
+    <li>Small &amp; Medium Businesses</li>
+    <li>Enterprises</li>
+  </ul>
+
+  <h3>Version</h3>
+  <p>Current Version: v1.0</p>
+
+  <h3>Roadmap</h3>
+  <h4>Next (v2.0)</h4>
+  <p>
+    In version 2.0 we will introduce a dedicated “super admin” role to manage the entire application (today it’s designed for personal use only) and integrate AI‑powered capabilities for automated price comparison and dynamic description generation.
+  </p>
+
+
+    <h2 id="installation-configuration">2. Installation &amp; Configuration</h2>
+
+  <h3>2.1 Prerequisites</h3>
+  <ul>
+    <li>PHP 8.2+ with the following extensions enabled:
+      <ul>
+        <li><code>intl</code></li>
+        <li><code>mbstring</code></li>
+        <li><code>xml</code> (for DOMPDF)</li>
+      </ul>
+    </li>
+    <li>Symfony CLI ≥ 7.x</li>
+    <li>Node.js ≥ 16</li>
+    <li>Yarn ≥ 1.22</li>
+  </ul>  
+  :contentReference[oaicite:0]{index=0}
+
+  <h3>2.2 Installation Steps</h3>
+  <ol>
+    <li>Unzip the archive into your web‑root (e.g. <code>C:\xampp\htdocs\signforge</code> or your Symfony CLI directory):</li>
+    <pre><code>unzip signforge.zip
+cd signforge
+</code></pre>
+    <li>Install PHP dependencies:<br>
+    <code>composer install</code></li>
+    <li>Configure your database in <code>.env.local</code>:
+    <pre><code>DATABASE_URL="mysql://user:password@127.0.0.1:3306/signforge"</code></pre>
+    </li>
+    <li>Create the database and schema:
+    <pre><code>php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate</code></pre>
+    </li>
+    <li>Load sample data:
+    <pre><code>php bin/console doctrine:fixtures:load</code></pre>
+    </li>
+    <li>Install frontend assets and build:
+    <pre><code>yarn install && yarn dev</code></pre>
+    </li>
+    <li>Start the dev server and visit <code>http://localhost:8000</code>:
+    <pre><code>symfony server:start</code></pre>
+    </li>
+  </ol>  
+  :contentReference[oaicite:1]{index=1}
+
+  <h3>2.3 Environment Configuration</h3>
+  <p>Copy the environment template and set your variables:</p>
+  <pre><code>cp .env .env.local
+# then edit .env.local:
+DATABASE_URL="mysql://user:password@127.0.0.1:3306/signforge"
+APP_ENV=dev
+APP_SECRET=<your-secret>
+</code></pre>  
+  :contentReference[oaicite:2]{index=2}
+
+  <h4>2.3.1 Parameters</h4>
+  <pre><code>parameters:
+    logos_directory: '%kernel.project_dir%/public/template/logos'
+    app.locales: ['en', 'fr', 'es', 'de']
+    default_locale: '%app.locales%'
+</code></pre>
+
+  <h3>2.4 Demo Data</h3>
+  <p>Example clients, documents and companies are seeded via fixtures.</p>  
+  :contentReference[oaicite:3]{index=3}
+
+  <h3>2.5 Admin Access</h3>
+  <ul>
+    <li><strong>Email:</strong> <code>admin@admin.com</code></li>
+    <li><strong>Password:</strong> <code>admin</code></li>
+  </ul>  
+  :contentReference[oaicite:4]{index=4}
+
+  <h3>2.6 Support</h3>
+  <p>For assistance, email <a href="mailto:support@signforge-app.com">support@signforge-app.com</a>.</p>  
+  :contentReference[oaicite:5]{index=5}
+
+
+    <h2 id="html-structure">3. HTML Structure</h2>
+
+  <h3>3.1 Base Layout</h3>
+  <p>
+    Your base template (<code>templates/base.html.twig</code>) sets up the HTML skeleton, meta tags, and injects the compiled CSS/JS bundles via Webpack Encore:
+  </p>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;!-- … meta tags … --&gt;
+    {% block stylesheets %}
+      {{ encore_entry_link_tags('app') }}  &lt;!-- includes public/build/app.css --&gt;
+    {% endblock %}
+  &lt;/head&gt;
+  &lt;body class="bg-gray-50 sm:mx-0 md:mx-6"&gt;
+    &lt;!-- … navigation, flashes … --&gt;
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+      {{ encore_entry_script_tags('app') }} &lt;!-- includes public/build/app.js --&gt;
+    {% endblock %}
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  :contentReference[oaicite:0]{index=0}
+
+  <h3>3.2 Dashboard & Page Templates</h3>
+  <p>
+    Pages like the dashboard (<code>templates/board/index.html.twig</code>) extend the base layout and use Tailwind utility classes for responsive structure:
+  </p>
+  <ul>
+    <li><code>min-h-screen bg-gray-50</code> — full‑height background</li>
+    <li><code>grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6</code> — responsive card grid</li>
+    <li><code>bg-white rounded-lg shadow p-6</code> — card styling</li>
+    <li><code>overflow-x-auto</code> — responsive tables</li>
+  </ul>
+  :contentReference[oaicite:1]{index=1}
+
+  <h3>3.3 Assets &amp; Tailwind CSS</h3>
+  <p>
+    Your source stylesheet (<code>assets/app.css</code>) uses Tailwind directives; Encore compiles it into a single bundle:
+  </p>
+  <pre><code class="language-css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom fonts, overrides… */
+@font-face {
+  font-family: 'Sohne';
+  src: url('../../public/template/fonts/jakarta.ttf') format('opentype');
+}
+</code></pre>
+  :contentReference[oaicite:2]{index=2}
+  <p>
+    In <code>webpack.config.js</code>, you define the <code>app</code> entrypoint that builds <code>assets/app.js</code> and <code>assets/app.css</code> into <code>public/build/</code>.
+  </p>
+
+
+
+  <h2 id="css-structure">4. CSS Files &amp; Structure</h2>
+
+  <h3>4.1 Tailwind Source & Directives</h3>
+  <p>Your main stylesheet (<code>assets/app.css</code>) uses Tailwind’s core directives:</p>
+  <pre><code class="language-css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font-face declarations */
+@font-face {
+    font-family: 'Sohne';
+    src: url('../../public/template/fonts/jakarta.ttf') format('opentype');
+}
+  </code></pre>
+  :contentReference[oaicite:0]{index=0}
+
+  <h3>4.2 Tailwind Configuration</h3>
+  <p>Tailwind is configured via <code>tailwind.config.js</code> (not shown here). Typical settings include:</p>
+  <ul>
+    <li><code>content</code> paths: <code>"./templates/**/*.twig"</code>, <code>"./assets/**/*.js"</code>, etc.</li>
+    <li>Custom <code>theme.extend</code> values (colors, fonts).</li>
+    <li>Plugins for forms, typography, etc.</li>
+  </ul>
+
+  <h3>4.3 Webpack Encore Integration</h3>
+  <p>Webpack Encore compiles <code>assets/app.css</code> (and <code>assets/app.js</code>) into <code>public/build/</code> bundles. In <code>templates/base.html.twig</code>, you include:</p>
+  <pre><code class="language-html">
+{% block stylesheets %}
+  {{ encore_entry_link_tags('app') }}
+{% endblock %}
+{% block javascripts %}
+  {{ encore_entry_script_tags('app') }}
+{% endblock %}
+  </code></pre>
+  :contentReference[oaicite:1]{index=1}
+
+  <h3>4.4 File Organization</h3>
+  <ul>
+    <li><code>assets/app.css</code> – Tailwind directives + overrides.</li>
+    <li><code>tailwind.config.js</code> – Purge/content paths & theme customization.</li>
+    <li><code>webpack.config.js</code> – Entry points:
+      <ul>
+        <li><code>.addEntry('app', ['./assets/app.js', './assets/app.css'])</code></li>
+      </ul>
+    </li>
+    <li><code>public/build/</code> – Compiled <code>app.css</code> & <code>app.js</code>.</li>
+  </ul>
+
+  <h2 id="javascript-functionality">5. JavaScript Functionality</h2>
+
+  <h3>5.1 Dynamic Item Management</h3>
+  <p>
+    The file <code>assets/js/_script.js</code> powers the “Add item” and “Remove item” buttons on the New Document form. It clones/deletes rows and recalculates all totals in real time.
+  </p>
+  <pre><code class="language-js">
+// assets/js/_script.js
+import './app.css';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper  = document.getElementById('items-wrapper');
+  const template = wrapper.querySelector('.item-row').cloneNode(true);
+
+  document.querySelectorAll('.add-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const newRow = template.cloneNode(true);
+      const index  = wrapper.children.length;
+      newRow.querySelectorAll('input, select').forEach(el => {
+        const name = el.getAttribute('name').replace(/\d+/, index);
+        el.setAttribute('name', name);
+        if (el.classList.contains('total')) el.value = '0.00';
+        if (el.classList.contains('qty'))   el.value = '1';
+        if (el.classList.contains('unit'))  el.value = '0.00';
+      });
+      wrapper.appendChild(newRow);
+      updateTotals();
+    });
+  });
+
+  wrapper.addEventListener('click', e => {
+    if (e.target.closest('.remove-item')) {
+      e.target.closest('.item-row').remove();
+      updateTotals();
+    }
+  });
+
+  function updateTotals() {
+    let subtotal = 0, discountSum = 0, taxSum = 0;
+    wrapper.querySelectorAll('.item-row').forEach(row => {
+      const qty   = parseFloat(row.querySelector('.qty').value) || 0;
+      const price = parseFloat(row.querySelector('.unit').value) || 0;
+      const disc  = parseFloat(row.querySelector('.discount').value) || 0;
+      const tax   = parseFloat(row.querySelector('.tax').value) || 0;
+      const line  = qty * price;
+      const discAmt = line * (disc / 100);
+      const taxAmt  = (line - discAmt) * (tax / 100);
+      subtotal    += line;
+      discountSum += discAmt;
+      taxSum      += taxAmt;
+      row.querySelector('.total').value = (line - discAmt + taxAmt).toFixed(2);
+    });
+    document.getElementById('subtotal').textContent       = `${currency}${subtotal.toFixed(2)}`;
+    document.getElementById('discount-total').textContent = `-${currency}${discountSum.toFixed(2)}`;
+    document.getElementById('tax-total').textContent      = `${currency}${taxSum.toFixed(2)}`;
+    document.getElementById('grand-total').textContent    = `${currency}${(subtotal - discountSum + taxSum).toFixed(2)}`;
+  }
+});
+  </code></pre>
+
+  <h3>5.2 Dashboard Charts</h3>
+  <p>
+    In <code>templates/board/index.html.twig</code> you include <code>template/js/chart.min.js</code> via <code>{{ asset() }}</code> and then initialize two Chart.js instances on DOMContentLoaded:
+  </p>
+  <div style="display: flex; gap:1em;">
+  <img
+    src="img/doughnut.png"
+    alt="Documents by type chart"
+    style="max-width: 45%; height: auto;"
+  >
+  <img
+    src="img/bar.png"
+    alt="Monthly revenue chart"
+    style="max-width: 45%; height: auto;"
+  >
+</div>
+
+  <pre><code class="language-html">
+&lt;!-- board/index.html.twig --&gt;
+&lt;!-- Ensure you’ve already included parent scripts via Encore in base.html.twig --&gt;
+
+&lt;!-- Load Chart.js --&gt;
+&lt;script src="{{ asset('template/js/chart.min.js') }}">&lt;/script&gt;
+
+&lt;script&gt;
+document.addEventListener('DOMContentLoaded', () =&gt; {
+  // Doughnut Chart
+  const typeCtx = document.getElementById('documentsByTypeChart');
+  if (typeCtx) {
+    new Chart(typeCtx, {
+      type: 'doughnut',
+      data: {
+        labels: {{ translatedLabels|json_encode|raw }},
+        datasets: [{ data: {{ dataCounts|json_encode|raw }} }]
+      },
+      options: { maintainAspectRatio: false }
+    });
+  }
+
+  // Bar Chart
+  const revCtx = document.getElementById('monthlyRevenueChart');
+  if (revCtx) {
+    new Chart(revCtx, {
+      type: 'bar',
+      data: {
+        labels: {{ monthlyRevenue|map(item =&gt; item.month)|json_encode|raw }},
+        datasets: [{
+          label: '{{ "Revenue"|trans }}',
+          data: {{ monthlyRevenue|map(item =&gt; item.total)|json_encode|raw }},
+          backgroundColor: "#4e73df"
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: value =&gt; {{ symbol|json_encode|raw }} + value.toLocaleString()
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: ctx =&gt; ctx.dataset.label + ': ' + {{ symbol|json_encode|raw }} + ctx.parsed.y.toLocaleString()
+            }
+          }
+        }
+      }
+    });
+  }
+});
+&lt;/script&gt;
+  </code></pre>
+
+  <h2 id="psd-assets">6. PSD Assets</h2>
+  <p>
+    No PSD (Photoshop) source files are provided in this release.
+  </p>
+
+
+
+    <h2 id="sources-credits">7. Sources &amp; Credits</h2>
+
+  <h3>7.1 Third‑Party Libraries</h3>
+  <ul>
+    <li><strong>DOMPDF</strong> – <code>composer require dompdf/dompdf</code> (v2.x)</li>
+    <li><strong>HTMLPurifier</strong> – <code>composer require ezyang/htmlpurifier</code> (v4.x)</li>
+    <li><strong>Symfony UX Stimulus &amp; Turbo</strong> – built‑in bundles  
+      (<code>Symfony\UX\StimulusBundle</code>, <code>Symfony\UX\Turbo\TurboBundle</code>)  
+    </li>
+    <li><strong>FOSCKEditorBundle</strong> – <code>composer require friendsofsymfony/ckeditor-bundle</code> (v2.x)</li>
+    <li><strong>Twig Extra Bundle</strong> – <code>Twig\Extra\TwigExtraBundle</code></li>
+    <li><strong>Webpack Encore</strong> – <code>Symfony\WebpackEncoreBundle\WebpackEncoreBundle</code></li>
+    <li><strong>Doctrine Migrations &amp; Fixtures</strong> – <code>Doctrine\Bundle\MigrationsBundle</code>, <code>Doctrine\Bundle\FixturesBundle</code></li>
+  </ul>
+
+  <h3>7.2 Fonts</h3>
+  <p><strong>Plus Jakarta Sans</strong> – from Google Fonts (<a href="https://fonts.google.com/specimen/Plus+Jakarta+Sans/license">license</a>), SIL Open Font License 1.1 (free for commercial use).</p>
+
+  <h3>7.3 Images &amp; Graphics</h3>
+  <p>No external images or graphics shipped with this release.</p>
+
+  <h3>7.4 Text &amp; Tutorials</h3>
+  <p>No third‑party text or tutorial content used.</p>
+
+  <h3>7.5 Project License</h3>
+  <p><strong>SignForge</strong> is <em>proprietary</em>. All rights reserved.</p>
+
+
+  <h2 id="php-code-explanation">8. PHP Code Explanation</h2>
+
+  <h3>8.1 DocumentsController</h3>
+  <p>This controller handles all document‑related routes (listing, filtering, preview, validation, PDF generation, creation):</p>
+  <pre><code class="language-php">
+&lt;?php
+namespace App\Controller;
+
+use App\Repository\DocumentRepository;
+use App\Repository\CompanyRepository;
+use App\Repository\TypeDocumentRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+#[Route('/documents', name: 'app_documents')]
+public function index(
+    DocumentRepository $repoDocument,
+    CompanyRepository $repoCompany,
+    TypeDocumentRepository $repoType
+): Response {
+    // Fetch docs, company for currency, types list
+    $documents = $repoDocument->findBy(['user' => $this->getUser()], ['id'=>'DESC']);
+    $company   = $repoCompany->findOneBy(['user' => $this->getUser()]);
+    $types     = $repoType->findBy([]);
+    return $this->render('documents/index.html.twig', [
+        'documents' => $documents,
+        'currency'  => $company?->getCurrency()??'$',
+        'types'     => $types,
+    ]);
+}
+  </code></pre>
+
+  <pre><code class="language-php">
+#[Route('/document/preview/{slug}', name: 'app_document_preview')]
+public function preview(Request $request, DocumentRepository $repoDocument, CompanyRepository $repoCompany): Response
+{
+    $slug     = $request->get('slug');
+    $document = $repoDocument->findOneBy(['user'=>$this->getUser(),'slug'=>$slug]);
+    $company  = $repoCompany->findOneBy(['user'=>$this->getUser()]);
+    return $this->render('documents/preview.html.twig', [
+        'document' => $document,
+        'currency' => $company?->getCurrency()??'$',
+        'company'  => $company,
+    ]);
+}
+  </code></pre>
+
+  <h3>8.2 PDF &amp; Validation</h3>
+  <pre><code class="language-php">
+#[Route('/documents/{slug}/pdf', name: 'app_documents_pdf')]
+public function pdf(Request $request, DocumentRepository $repoDoc, PdfService $pdfService, Environment $twig, CompanyRepository $repoCompany): Response
+{
+    // Fetch & validate document and company, render Twig to HTML, generate PDF
+    // ...
+    return new Response($pdfOutput, 200, [
+        'Content-Type'        => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="document.pdf"',
+    ]);
+}
+
+#[Route('/document/validate/{slug}', name: 'app_document_validate')]
+public function validate(Request $request, DocumentRepository $repoDocument, EntityManagerInterface $manager): Response
+{
+    $doc = $repoDocument->findOneBy(['user'=>$this->getUser(),'slug'=>$request->get('slug')]);
+    $doc->setStatus(true);
+    $manager->flush();
+    $this->addFlash('success', $this->translator->trans('The document has been successfully validated.'));
+    return $this->redirectToRoute('app_documents');
+}
+  </code></pre>
+
+  <h3>8.3 Document Creation (AJAX)</h3>
+  <p>Handles POST to <code>/documents/create</code>, sanitizes input, validates items, persists <code>Document</code> + <code>DocumentItem</code> entities, and returns JSON:</p>
+  <pre><code class="language-php">
+#[Route('/documents/create', name: 'app_documents_create', methods:['POST'])]
+public function create(
+    Request $request,
+    EntityManagerInterface $manager,
+    HtmlSanitizer $sanitiser,
+    ClientRepository $repoClient,
+    TypeDocumentRepository $repoType,
+    DocumentRepository $repoDocument
+): JsonResponse {
+    // 1) Sanitize & validate inputs
+    // 2) Check uniqueness
+    // 3) Loop items, calculate totals
+    // 4) Persist Document & DocumentItem entities
+    // 5) Flush & return JSON success
+}
+  </code></pre>
+
+  <h3>8.4 Other Controllers</h3>
+  <p>You also have:</p>
+  <ul>
+    <li><code>DocumentsTypesController</code> – CRUD &amp; listing of document types.</li>
+    <li><code>ClientController</code> &amp; <code>CompanyController</code> – manage clients &amp; company profile.</li>
+    <li><code>BoardController</code> – dashboard overview &amp; charts.</li>
+  </ul>
+
+  <h3>8.5 Form Types</h3>
+  <p>Custom Symfony form types map your entities to HTML forms:</p>
+  <pre><code class="language-php">
+// src/Form/DocumenttypeType.php
+namespace App\Form;
+
+use App\Entity\TypeDocument;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class DocumenttypeType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name',  TextType::class, ['label' => 'Type Slug'])
+            ->add('label', TextType::class, ['label' => 'Display Label'])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => TypeDocument::class,
+        ]);
+    }
+}
+  </code></pre>
+
+  <h3>8.6 HtmlSanitizer Service</h3>
+  <p>This service cleans user input to prevent XSS by allowing only safe HTML tags and attributes:</p>
+  <pre><code class="language-php">
+// src/Service/HtmlSanitizer.php
+namespace App\Service;
+
+use HTMLPurifier;
+use HTMLPurifier_Config;
+
+class HtmlSanitizer
+{
+    private HTMLPurifier $purifier;
+
+    public function __construct()
+    {
+        $config = HTMLPurifier_Config::createDefault();
+        $config->set('HTML.Allowed', 'p,b,i,ul,li,a[href]');
+        $this->purifier = new HTMLPurifier($config);
+    }
+
+    public function purify(?string $html): string
+    {
+        if (!$html) {
+            return '';
+        }
+        return $this->purifier->purify($html);
+    }
+}
+  </code></pre>
+
+  <h2 id="api-integration">9. API Integration</h2>
+  <p>
+    No external API integrations are implemented in this release.
+  </p>
+
+
+
+  <h2 id="unique-features">10. Unique Features &amp; Customizations</h2>
+
+  <ul>
+    <li><strong>Real‑Time Totals Calculation:</strong> Dynamic item rows automatically recalculate subtotals, discounts, taxes, and grand total on the client side without page reloads.</li>
+    <li><strong>Responsive Dashboard:</strong> Overview cards and charts adapt to any screen size using Tailwind CSS grid utilities.</li>
+    <li><strong>Multi‑Language Support:</strong> Full translation of UI and document content via Symfony’s translation component, with locales defined in <code>app.locales</code> parameter.</li>
+    <li><strong>Custom Logo Upload:</strong> Store your company logo in <code>public/template/logos</code> and have it automatically embedded in all generated PDFs.</li>
+    <li><strong>Webpack Encore &amp; Tailwind Integration:</strong> Modern asset pipeline that compiles JavaScript and CSS with PostCSS/Tailwind directives for fast builds and small bundle sizes.</li>
+    <li><strong>HTML Sanitization:</strong> All user‑provided text fields are cleaned via the <code>HtmlSanitizer</code> service to prevent XSS.</li>
+    <li><strong>PDF Watermark &amp; Footer:</strong> Customizable header/footer text (e.g., legal disclaimers) injected via <code>PdfService</code>.</li>
+  </ul>
+
+
+
+  <h2 id="faq-support">11. FAQ &amp; Support</h2>
+
+  <h3>How can I change my company details or logo?</h3>
+  <p>Navigate to <strong>Company</strong> in the navbar. You can upload a new logo and update address, phone, and tax information.</p>
+
+  <h3>Can I customize document templates?</h3>
+  <p>At v1.0, only the default template is available. Custom templates and theme settings are planned for v2.0.</p>
+
+  <h3>Where can I view my invoices and quotes?</h3>
+  <p>Use the <strong>Documents</strong> menu to filter by type, search by document number, or preview before downloading the PDF.</p>
+
+<h3>How do I report a bug or request a feature?</h3>
+<p>Please email your bug reports or feature requests to <a href="mailto:support@signforge.tech">support@signforge.tech</a>.</p>
+
+
+  <h2 id="unit-testing">12. Unit Testing</h2>
+  <h3>12.1 Test Folder Structure</h3>
+  <p>Your tests live under <code>tests/</code>, organized by layer:</p>
+  <pre><code>tests/
+├─ Controller/
+├─ Entity/
+└─ Service/
+</code></pre>
+
+  <h3>12.2 Example Test: <code>HtmlSanitizerTest</code></h3>
+  <p>Located in <code>tests/Service/HtmlSanitizerTest.php</code>:</p>
+  <pre><code class="language-php">
+&lt;?php
+namespace App\Tests\Service;
+
+use PHPUnit\Framework\TestCase;
+use App\Service\HtmlSanitizer;
+
+class HtmlSanitizerTest extends TestCase
+{
+    private HtmlSanitizer $sanitizer;
+
+    protected function setUp(): void
+    {
+        $this->sanitizer = new HtmlSanitizer();
+    }
+
+    public function testPurifyRemovesScriptTags(): void
+    {
+        $dirty = '&lt;p&gt;Safe&lt;/p&gt;&lt;script&gt;alert("XSS")&lt;/script&gt;';
+        $clean = $this->sanitizer->purify($dirty);
+
+        $this->assertStringNotContainsString('&lt;script', $clean);
+        $this->assertStringContainsString('&lt;p&gt;Safe&lt;/p&gt;', $clean);
+    }
+
+    public function testPurifyAllowsBasicTags(): void
+    {
+        $dirty = '&lt;ul&gt;&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;/ul&gt;';
+        $clean = $this->sanitizer->purify($dirty);
+
+        $this->assertStringContainsString('&lt;ul&gt;', $clean);
+        $this->assertStringContainsString('&lt;li&gt;One&lt;/li&gt;', $clean);
+    }
+
+    public function testPurifyStripsDisallowedAttributes(): void
+    {
+        $dirty  = '&lt;p onclick="evil()" style="color:red;"&gt;Click me&lt;/p&gt;';
+        $dirty .= '&lt;a href="http://example.com" target="_blank" onclick="evil()"&gt;Link&lt;/a&gt;';
+        $clean = $this->sanitizer->purify($dirty);
+
+        $this->assertStringNotContainsString('onclick=', $clean);
+        $this->assertStringNotContainsString('style=', $clean);
+        $this->assertStringNotContainsString('target=', $clean);
+        $this->assertStringContainsString('href="http://example.com"', $clean);
+    }
+
+    public function testPurifyReturnsEmptyStringOnNull(): void
+    {
+        $this->assertSame('', $this->sanitizer->purify(null));
+    }
+}
+?&gt;
+</code></pre>
+
+  <h3>12.3 Running the Test Suite</h3>
+  <pre><code>./vendor/bin/phpunit tests</code></pre>
+
+  <h2 id="internationalization">13. Internationalization</h2>
+  <h3>13.1 Configuration (<code>config/packages/translation.yaml</code>)</h3>
+  <pre><code class="language-yaml">
+framework:
+  default_locale: en
+  translator:
+    default_path: '%kernel.project_dir%/translations'
+    providers:
+</code></pre>
+
+  <h3>13.2 Translation Files Structure</h3>
+  <pre><code>translations/
+├─ messages.de.yaml
+├─ messages.es.yaml
+├─ messages.fr.yaml
+├─ messages+intl-icu.de.yaml
+├─ messages+intl-icu.es.yaml
+├─ messages+intl-icu.fr.yaml
+├─ security.de.yaml
+├─ security.es.yaml
+├─ security.fr.yaml
+├─ validators.de.yaml
+├─ validators.en.yaml
+├─ validators.es.yaml
+└─ validators.fr.yaml
+</code></pre>
+
+  <h3>13.3 Using Translations in Twig</h3>
+  <pre><code class="language-twig">
+{# templates/documents/preview.html.twig #}
+&lt;h1&gt;{{ 'document.title'|trans({
+    '%number%': document.documentNumber
+}) }}&lt;/h1&gt;
+&lt;button&gt;{{ 'button.save'|trans }}&lt;/button&gt;
+</code></pre>
+
+</body>
+</html>
