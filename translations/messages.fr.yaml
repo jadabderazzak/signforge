@@ -210,3 +210,5 @@
 "List of clients": "Liste des clients"
 "SignForge | Dashboard": "SignForge | Tableau de bord"
 "The company has been successfully updated.": "L'entreprise a été mise à jour avec succès."
+login: "Connexion"
+register: "Inscription"
